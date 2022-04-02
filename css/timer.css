@@ -1,0 +1,89 @@
+.timer-options{
+  position:relative;
+  float: right;
+  left: 12px;
+  top: -12px;
+}
+
+/*animation settings nav*/
+@keyframes settings-animation {
+  from{width: 0;}
+  to{width: 22%;}
+}
+.settings-animation{
+   animation-name: settings-animation;
+   animation-duration: .5s;
+   transition: ease-in-out;
+   animation-timing-function: ease;
+   -webkit-animation-timing-function: ease;
+    animation-fill-mode: forwards;
+   -webkit-animation-fill-mode: forwards;
+}
+.settings-nav{
+  position:absolute;
+  width: 0;
+  height: 100vh;
+  background-color:#fff;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+}
+.setting-nav-top{
+  width:90%;
+  height:55px;
+  border-bottom: solid 1px #07fae2;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+.seeting-nav-top-botton{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  float: right;
+  left: -65px;
+}
+.seeting-nav-top-botton > i{
+  color:#07fae2;
+}
+.setting-nav-top > h2,h5{
+  padding: 15px 0;
+  color:#07fae2;
+  font-size: 2.0rem;
+}
+.settings-nav-bottom{
+  position: absolute;
+  width: 100%;
+  height: 30%;
+  border-top: solid 1px #000;
+  bottom: 0;
+}
+.settings-nav-color-options{
+  position:relative;
+  width: 85%;
+  height: 15%;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto;
+  padding:1px;
+  margin:0 auto;
+  top: 25px;
+  cursor: pointer;
+}
+.color-picker{
+  width: 50px;
+  height: 20px;
+  border: solid 1px #000;
+  border-radius: 5px;
+}
+.timer-font{
+  font-size: 5.5rem;
+  text-align: center;
+  font-weight:500;
+  color:#2d2d2e;
+}
+.start-timer-button{
+  position: absolute; 
+  width: 50px;
+  height: 50px;
+  margin-top: 85px;
+}

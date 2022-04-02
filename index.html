@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!--css-->
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/timer.css">
+  <link rel="stylesheet" href="//cdn.quilljs.com/0.16.0/quill.snow.css" />
+  <!--font awesome-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://kit.fontawesome.com/bb736a9cab.js" crossorigin="anonymous"></script>
+
+
+  <!--Quill-->
+  <script src="https://cdn.tiny.cloud/1/73lvgqu39yk64tkxmoodlupm07ajm110g4suhdr3nxf52er5/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+</head>
+<bod >
+  <div class="container" id="container">
+   <div class="options__container">
+      <div class="option-name">
+      <button class="button" onclick="openBackground()"><i class="fa-solid fa-image"></i></button>
+      <p>Background</p>
+    </div>
+    <div class="option-name">
+      <button class="button" onclick="getEditor(this.id)"><i class="fa-solid fa-text-width"></i></button>
+      <p>Text</p>
+    </div>
+    <div class="option-name">
+      <button class="button" ><i class="fa-solid fa-pencil"></i></button>
+      <p>Draw</p>
+    </div>
+    <div class="option-name">
+      <button class="button" onclick="timer(this.id)"><i class="fa-solid fa-hourglass"></i></button>
+      <p>Timer</p>
+    </div>
+    <div class="option-name">
+      <button class="button"><i class="fa-solid fa-calendar-days"></i></button>
+      <p>Calendar</p>
+    </div>
+    <div class="option-name">
+      <button class="button"><i class="fa-solid fa-text-width"></i></button>
+      <p>Text</p>
+    </div>
+    <div class="option-name">
+      <button class="button" ><i class="fa-solid fa-text-width"></i></button>
+      <p>Text</p>
+    </div>
+    <div class="option-name">
+      <button class="button"><i class="fa-solid fa-text-width"></i></button>
+      <p>Text</p>
+    </div>
+    <div class="option-name">
+      <button class="button" ><i class="fa-solid fa-text-width"></i></button>
+      <p>Text</p>
+    </div>
+    <div class="option-name">
+      <button class="button" ><i class="fa-solid fa-text-width"></i></button>
+      <p>Text</p>
+    </div>
+    <div class="option-name">
+      <button class="button" ><i class="fa-solid fa-text-width"></i></button>
+      <p>Text</p>
+    </div>
+    </div>
+
+    <!--background div-->
+    <div class="backgrounds-options" id="background-options">
+      <h2>Photos</h2>
+      <div class="background-grid">
+        <img src="/images/back1.jpg" alt="bac1" class="background-thumb" id="back1" onclick="getNewBackground(this.id)">
+        <img src="/images/back2.jpg" alt="bac1" class="background-thumb" id="back2" onclick="getNewBackground(this.id)">
+        <img src="/images/back3.jpg" alt="bac1" class="background-thumb" id="back3" onclick="getNewBackground(this.id)">
+        <img src="/images/back4.jpg" alt="bac1" class="background-thumb" id="back4" onclick="getNewBackground(this.id)">
+        <img src="/images/back5.jpg" alt="bac1" class="background-thumb" id="back5" onclick="getNewBackground(this.id)">
+        <img src="/images/back6.jpg" alt="bac1" class="background-thumb" id="back6" onclick="getNewBackground(this.id)">
+        <img src="/images/back7.jpg" alt="bac1" class="background-thumb" id="back7" onclick="getNewBackground(this.id)">
+        <img src="/images/back1.jpg" alt="bac1" class="background-thumb" id="back8" onclick="getNewBackground(this.id)">
+        <img src="/images/back1.jpg" alt="bac1" class="background-thumb" id="back9" onclick="getNewBackground(this.id)">
+        <img src="/images/back1.jpg" alt="bac1" class="background-thumb" id="back10" onclick="getNewBackground(this.id)">
+      </div>
+    </div>
+
+    <!--text section-->
+  <div class="drag-container" id="drag-container">
+
+</div>
+
+<!--TIMER OPTIONS-->
+<div class="settings-nav">
+    <div class="setting-nav-top">
+      <h2>I</h2>
+      <h5>Timer</h5>
+      <button class="seeting-nav-top-botton"><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+    <div class="settings-nav-bottom">
+      <div class="settings-nav-color-options">
+        <div class="color-picker" style="background-color: #fff" id="white""></div>
+        <div class="color-picker" style="background-color: #3CDD7CFF;" id="green""></div>
+        <div class="color-picker" style="background-color:#DD3C3CFF;" id="red" ></div>
+        <div class="color-picker" style="background-color:#3C7CDDFF;" id="blue" ></div>
+        <div class="color-picker" style="background-color:#8FD8E9FF;" id="light-blue" ></div>
+        <div class="color-picker" style="background-color:#DD9C3CFF;" id="orange" ></div>
+        <div class="color-picker" style="background-color:#5C3CDDFF;" id="purple" ></div>
+        <div class="color-picker" style="background-color:#DD3C9CFF;" id="magenta" ></div>
+        <div class="color-picker" style="background-color:#000000FF;" id="black" ></div>
+        <div class="color-picker" style="background-color:#FEFFCBFF;" id="skin" ></div>
+        <div class="color-picker" style="background-color:#f2de05;" id="yellow" ></div>
+        <div class="color-picker" style="background-color:#bf05f2;" id="light-purple" ></div>
+      </div>
+    </div>
+
+   
+</div>
+
+  </div>
+ <script src="/javascript/app.js"></script>
+ <script src="https://cdn.quilljs.com/1.3
+</html>
