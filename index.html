@@ -8,14 +8,22 @@
   <!--css-->
   <link rel="stylesheet" href="/css/styles.css">
   <link rel="stylesheet" href="/css/timer.css">
+  <link rel="stylesheet" href="/css/calendar.css">
   <link rel="stylesheet" href="//cdn.quilljs.com/0.16.0/quill.snow.css" />
   <!--font awesome-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://kit.fontawesome.com/bb736a9cab.js" crossorigin="anonymous"></script>
 
-
   <!--Quill-->
   <script src="https://cdn.tiny.cloud/1/73lvgqu39yk64tkxmoodlupm07ajm110g4suhdr3nxf52er5/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+  <!--GOOGLE FONTS-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@200&display=swap" rel="stylesheet">
+
 </head>
 <bod >
   <div class="container" id="container">
@@ -25,6 +33,7 @@
       <p>Background</p>
     </div>
     <div class="option-name">
+      <p class="number-ele-open"></p>
       <button class="button" onclick="getEditor(this.id)"><i class="fa-solid fa-text-width"></i></button>
       <p>Text</p>
     </div>
@@ -33,11 +42,12 @@
       <p>Draw</p>
     </div>
     <div class="option-name">
+      <p class="number-ele-open"></p>
       <button class="button" onclick="timer(this.id)"><i class="fa-solid fa-hourglass"></i></button>
       <p>Timer</p>
     </div>
     <div class="option-name">
-      <button class="button"><i class="fa-solid fa-calendar-days"></i></button>
+      <button class="button" onclick="Calendar(this.id)"><i class="fa-solid fa-calendar-days"></i></button>
       <p>Calendar</p>
     </div>
     <div class="option-name">
@@ -77,8 +87,8 @@
         <img src="/images/back5.jpg" alt="bac1" class="background-thumb" id="back5" onclick="getNewBackground(this.id)">
         <img src="/images/back6.jpg" alt="bac1" class="background-thumb" id="back6" onclick="getNewBackground(this.id)">
         <img src="/images/back7.jpg" alt="bac1" class="background-thumb" id="back7" onclick="getNewBackground(this.id)">
-        <img src="/images/back1.jpg" alt="bac1" class="background-thumb" id="back8" onclick="getNewBackground(this.id)">
-        <img src="/images/back1.jpg" alt="bac1" class="background-thumb" id="back9" onclick="getNewBackground(this.id)">
+        <img src="/images/back8.jpg" alt="bac1" class="background-thumb" id="back8" onclick="getNewBackground(this.id)">
+        <img src="/images/back9.jpg" alt="bac1" class="background-thumb" id="back9" onclick="getNewBackground(this.id)">
         <img src="/images/back1.jpg" alt="bac1" class="background-thumb" id="back10" onclick="getNewBackground(this.id)">
       </div>
     </div>
@@ -117,5 +127,5 @@
 
   </div>
  <script src="/javascript/app.js"></script>
- <script src="https://cdn.quilljs.com/1.3
+
 </html>

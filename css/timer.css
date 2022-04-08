@@ -76,14 +76,65 @@
   border-radius: 5px;
 }
 .timer-font{
+  position: absolute;
+  display: inline-block;
   font-size: 5.5rem;
   text-align: center;
   font-weight:500;
   color:#2d2d2e;
+  width: 250px;
+  margin-top: 30px;
+  font-family: 'Bebas Neue', cursive;
+}
+.minute-font{
+  margin-left: -255px;
+}
+.second-font{
+  margin-left: -185px;
+}
+.timer-inside-button{
+  position: absolute; 
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  border:none;
+  color: darkgreen;
+  z-index: 1000;
+  cursor: pointer;
+  font-size: 15px;
+}
+.plus-minute{
+  margin: 15px -150px;
+}
+.minus-minute{
+  margin: 120px -150px;
+}
+.timerAndButtonDiv{
+  width: 450px;
+  height: 170px;
+  background:transparent;
+  text-align: center;
+  margin: 0 auto;
+}
+.plus-second-button{
+  margin: 15px -70px;
+}
+.minus-second-button{
+  margin: 120px -70px;
 }
 .start-timer-button{
-  position: absolute; 
-  width: 50px;
-  height: 50px;
-  margin-top: 85px;
+  position: absolute;
+  margin: 65px  0;
+  color: green;
+}
+.puase-timer-button{
+  position: absolute;
+  margin: 65px  0;
+  color: green;
+  visibility: hidden;
+}
+.refresh-timer-button{
+  position: absolute;
+  margin: 65px  60px;
+  color: green;
 }

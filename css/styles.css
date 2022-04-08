@@ -4,6 +4,7 @@
 }
 body{
   overflow: hidden;
+  font-family: 'Prompt', sans-serif;
 }
 .container{
   background-image: url("/images/back.jpg"); /* The image used */
@@ -30,8 +31,9 @@ body{
 }
 .option-name{
   display: inline-block;
-  padding: 15px 5px;
+  padding: 0px 5px;
   text-align: center;
+  justify-content: center;
 }
 
 .button{
@@ -83,16 +85,18 @@ body{
   position: absolute;
   width: 400px;
   height: 400px;
-  background: #fff;
-  box-shadow: 3px 3px 3px #888888;
-  z-index:0;
+  background:transparent;
+  z-index:5000;
   transition: smooth;
   border-radius: 10px;
 }
 .toolbar{
-  width: 400px;
-  height: 65px;
-  background-color:#edeef0;
+  width: 450px;
+  height: 50px;
+  background-color: #e8ebe9;
+ 
+  cursor: move;
+  margin: 0 auto;
 }
 .the-editor.dragging{
   opacity: 0.8;
@@ -101,8 +105,7 @@ body{
 .text-space{
   width: 350px;
   height: 350px;
-  box-shadow: 5px 10px 18px #888888;
-  background-color: #fff;
+  background-color:transparent;
   margin: 0 auto;
   z-index: 5;
 }
@@ -112,6 +115,20 @@ body{
   height: 90vh;
   background-color: none;
 
+}
+
+/*toolbar*/
+.navbar-fonts{
+  color: #000;
+  padding: 10px 45px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  z-index: 6000;
+  cursor:pointer;
+}
+
+.input-weight{
+  font: bold;
 }
 
 /*DELETE EDITOR*/
@@ -131,6 +148,7 @@ body{
   border-radius:100%;
   cursor: pointer;
   border:none;
+  font-size: 1.5rem;
 }
 
 .delete-button{
@@ -141,17 +159,31 @@ body{
 .fa-x{
   font-size: 13px;
 }
-textarea{
-  resize: none;
-  font-size: 18px;
-}
+
 i{
   color: darkcyan;
 }
-/*timer*/
-.timer-options{
-  position:relative;
-  float: right;
-  left: 12px;
-  top: -12px;
+.my-text{
+  width: 400px;
+  height: 10px;
+  background-color:transparent;
 }
+.text-editor-options{
+  position: absolute;
+  margin:-510px 425px;
+}
+.rounded-divs{
+  border-radius: 5px;
+}
+.number-ele-open{
+  background-color:green;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  color: #fff;
+  font-weight: bold;
+  border: solid 1px #fff;
+  visibility: hidden;
+  box-shadow: 2px 2px 2px #888888;
+}
+/*timer*/
