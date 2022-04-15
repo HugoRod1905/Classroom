@@ -6,31 +6,29 @@ function openBackground(){
 
 /*load random backgrounds*/
 window.addEventListener('DOMContentLoaded', (event) => {
-  let backsgrounds = ["/images/back.jpg","/images/back1.jpg","/images/back2.jpg","/images/back3.jpg","/images/back4.jpg","/images/back5.jpg","/images/back6.jpg","/images/back7.jpg","/images/back8.jpg","/images/back9.jpg"];
-  let random = Math.floor(Math.random() * 10);
-  console.log(random)
+  let backsgrounds = ["/images/back.jpg","/images/back1.jpg","/images/back2.jpg","/images/back3.jpg","/images/back4.jpg","/images/back5.jpg","/images/back6.jpg","/images/back7.jpg","/images/back8.jpg","/images/back9.jpg","/images/back10.jpg","/images/back11.jpg","/images/back12.jpg","/images/back13.jpg","/images/back14.jpg","/images/back15.jpg","/images/back16.jpg"];
+  let random = Math.floor(Math.random() * 17);
   document.getElementById("container").style.backgroundImage = `url(${backsgrounds[random]})`;
 });
 
 /*get new background image*/
 function getNewBackground(id){
-
   let baseBackUrl = "/images/";
   let endUrl = id + ".jpg";
   let backUrl = baseBackUrl + endUrl
-  console.log(backUrl)
   document.getElementById("container").style.backgroundImage = `url(${backUrl})`;
   getElementId("background-options").style.display = "none";
 }
-
+function closeBackgroundGrid(){
+  document.getElementById("background-options").style.display = "none";
+}
 
 let id = 0;
 let dragValue;
-
+let editorNumber = 0;
 let container = document.getElementById("drag-container");
 let getEditor = () =>{
-  console.log(id)
-
+  
   canvas("450px","10px","transparent",id,"0px","0px");
   let textEditor =document.getElementById(id);
   let toolbar = document.createElement("div");
@@ -106,16 +104,18 @@ let getEditor = () =>{
     setTimeout(()=>{
       textEditor.remove();
       id--;
-      numberEleOpenTag.innerHTML = id;
-      id > 0 ? numberEleOpenTag.style.visibility = "visible":numberEleOpenTag.style.visibility = "hidden";
+      editorNumber--;
+      numberEleOpenTag.innerHTML = editorNumber;
+      editorNumber > 0 ? numberEleOpenTag.style.visibility = "visible":numberEleOpenTag.style.visibility = "hidden";
     },200)
   
   }
 })
 
  id += 1;
- numberEleOpenTag.innerHTML = id;
- id > 0 ? numberEleOpenTag.style.visibility = "visible":numberEleOpenTag.style.visibility = "hidden";
+ editorNumber += 1;
+ numberEleOpenTag.innerHTML =editorNumber;
+ editorNumber > 0 ? numberEleOpenTag.style.visibility = "visible":numberEleOpenTag.style.visibility = "hidden"
 }
 
 /*create canvas to reuse*/
@@ -133,6 +133,7 @@ let canvas = (width,height,background,id,posLeft,posHeight)=>{
 }
 
 /*create timer*/
+let timerNumber = 0;
  function timer(){
    canvas("400px","180px","#fff",id,"0px","0px");
    let timer1 = document.getElementById(id);
@@ -150,7 +151,7 @@ let canvas = (width,height,background,id,posLeft,posHeight)=>{
   let startTimerButton = document.createElement("button");
   let pauseTimerButton = document.createElement("button");
   let timerRefreshButton =  document.createElement("button");
-  
+  let numberTimerOpenTag = document.querySelector(".timer-ele-open");
 
   deleteButton.classList.add("small-button","delete-button","fa-solid","fa-xmark");
   timerAndButtonDiv.classList.add("timerAndButtonDiv");
@@ -215,12 +216,15 @@ let canvas = (width,height,background,id,posLeft,posHeight)=>{
   /*Set timer function*/
    function startTimer(){
      seconds--;
+     
      seconds <= 0 ? seconds = 60 : seconds = seconds;
     if(seconds <= 1){
       minutes--;
     }
 
-    if(seconds < 0 && minutes < 0){
+    if(seconds < 1 && minutes < 1){
+      var audio = new Audio("/sounds/sounds1.mp3");
+     audio.play();
       clearInterval(interval);
     }
      secondFont.innerHTML = seconds;
@@ -229,7 +233,7 @@ let canvas = (width,height,background,id,posLeft,posHeight)=>{
 
    startTimerButton.addEventListener('click',()=>{
      if(seconds != 0 || minutes != 0){
-     interval = setInterval(startTimer,100);
+     interval = setInterval(startTimer,1000);
      }
      startTimerButton.style.visibility = "hidden";
      pauseTimerButton.style.visibility = "visible";
@@ -269,8 +273,7 @@ let canvas = (width,height,background,id,posLeft,posHeight)=>{
   /*get background color bottom, it gets the id to generate the color*/
 let colorPicker = document.querySelectorAll(".color-picker").forEach((item)=>{
   item.addEventListener('click',()=>{
-    console.log(id)
-    console.log(item.id)
+   
     switch(item.id){
       case 'white': timer1.style.backgroundColor = "#FFF";
       break;
@@ -333,37 +336,132 @@ deleteButton.addEventListener('click',()=>{
   setTimeout(()=>{
     timer1.remove();
     id--;
+    timerNumber--;
+    numberTimerOpenTag.innerHTML = timerNumber;
+    timerNumber > 0 ? numberTimerOpenTag.style.visibility = "visible":numberTimerOpenTag.style.visibility = "hidden";
   },200)
 
 }
 })
 
-id += 1;
-numberEleOpenTag.innerHTML = id;
- id > 0 ? numberEleOpenTag.style.visibility = "visible":numberEleOpenTag.style.visibility = "hidden";
+ id += 1;
+ timerNumber += 1;
+ console.log(timerNumber);
+ numberTimerOpenTag.innerHTML = timerNumber;
+ timerNumber > 0 ? numberTimerOpenTag.style.visibility = "visible":numberTimerOpenTag.style.visibility = "hidden";
 }
 
+/*Calendar*/
+calendarNumber = 0;
 function Calendar(){
-  canvas("450px","350px","#fff",id,"0","0");
-  let calendar = document.getElementById(id);
+  let calendarId = id + 100;
+  canvas("300px","360px","#fff",calendarId,"0","0");
+  let calendar = document.getElementById(calendarId);
   let calendarContainer = document.createElement('div');
- let deleteButton = document.createElement('button');
- let calendarOption = document.createElement('button');
+  let deleteButton = document.createElement('button');
+  let calendarOption = document.createElement('button');
+  let currentDateDiv =  document.createElement('div');
+  let day = document.createElement('p');
+  let month = document.createElement('p');
+  let year = document.createElement('p');
+  let calendarOptionCanvas = document.querySelector(".settings-calendar");
+  let numberCalendarOpenTag = document.querySelector(".calendar-ele-number");
+
+  day.classList.add("day","dates");
+  month.classList.add("month","dates");
+  year.classList.add("year","dates");
+  calendar.classList.add("rounded-divs");
+  deleteButton.classList.add("calendar-delete-button");
+  calendarOption.classList.add("calendar-options","fa-solid","fa-gear","small-button");
+ /*declare dates in variables*/
+  
+ let date = new Date()
+let day1 = date.getDate();
+let month1 = date.getMonth()+1;
+let year1 = date.getFullYear();
+
+switch(month1){
+  case 1: month.innerHTML = "January";
+  break;
+  case 2: month.innerHTML = "February";
+  break;
+  case 3: month.innerHTML = "March";
+  break;
+  case 4: month.innerHTML = "April";
+  break
+  case 5: month.innerHTML = "May";
+  break;
+  case 6: month.innerHTML = "June";
+  break;
+  case 7: month.innerHTML = "July";
+  break;
+  case 8: month.innerHTML = "August";
+  break;
+  case 9: month.innerHTML = "September";
+  break;
+  case 10: month.innerHTML = "October";
+  break;
+  case 11: month.innerHTML = "November";
+  break;
+  case 12: month.innerHTML = "December";
+  break;
+  default:
+}
+
+day.innerHTML = day1;
+
+year.innerHTML = year1;
 
  deleteButton.classList.add("small-button","fa-solid","fa-xmark")
+ currentDateDiv.classList.add("current-date-div");
  
- calendarContainer.classList.add("calendar-container")
+ calendarContainer.classList.add("calendar-container","rounded-divs");
  calendar.style.position = "absolute";
  calendar.appendChild(deleteButton);
  calendar.appendChild(calendarOption);
+ calendar.appendChild(currentDateDiv);
+ currentDateDiv.appendChild(month);
+ currentDateDiv.appendChild(day);
+ currentDateDiv.appendChild(year);
  calendar.appendChild(calendarContainer);
+
+ let colorPicker1 = document.querySelectorAll(".color-picker").forEach((item1)=>{
+  item1.addEventListener('click',()=>{
+   
+    switch(item1.id){
+      case 'white': currentDateDiv.style.backgroundColor = "#FFF";
+      break;
+      case 'green':currentDateDiv.style.backgroundColor = "#3CDD7CFF";
+      break;
+      case 'red': currentDateDiv.style.backgroundColor = "#DD3C3CFF" ;
+      break;
+      case 'blue': currentDateDiv.style.backgroundColor = "#3C7CDDFF";
+      break;
+      case 'light-blue': timer1.style.backgroundColor = "#8FD8E9FF";
+      break;
+      case 'orange': timer1.style.backgroundColor = "#DD9C3CFF";
+      break;
+      case 'purple': timer1.style.backgroundColor = "#5C3CDDFF";
+      break;
+      case 'magenta': timer1.style.backgroundColor = "#DD3C9CFF";
+      break;
+      case 'black': timer1.style.backgroundColor = "#000000FF";
+      break;
+      case 'skin': timer1.style.backgroundColor = "#FEFFCBFF";
+      break;
+      case 'yellow': timer1.style.backgroundColor = "#f2de05";
+      break;
+      case 'light-purple': timer1.style.backgroundColor = "#bf05f2";
+      break;
+    }
+    
+  })
+})
+ 
+
  calendar.onmousedown = function(){
   dragValue = calendar;
   calendar.style.zIndex = "100";
-}
-
-for(let i = 1; i < 31;i++){
-  calendarContainer.insertAdjacentHTML("beforeend",`<div class="days">${i}</div>`)
 }
 
 document.onmouseup = function(e){
@@ -385,12 +483,196 @@ deleteButton.addEventListener('click',()=>{
   setTimeout(()=>{
     calendar.remove();
     id--;
-    optionsCanvas.classList.remove("settings-animation")
+    
+    calendarNumber--;
+    numberCalendarOpenTag.innerHTML = calendarNumber;
+    calendarNumber > 0 ? numberCalendarOpenTag.style.visibility = "visible":numberCalendarOpenTag.style.visibility = "hidden";
   },200)
 
 }
 })
 
- console.log(id);
+for(let dayCount = 1; dayCount < 32;dayCount++){
+  calendarContainer.insertAdjacentHTML("beforeend",`<div class="days">${dayCount}</div>`)
+  
+}
+
+let currentDay = document.querySelectorAll(".days");
+  currentDay.forEach((date,i)=>{
+    i + 1  === day1 ? date.style.color = 'red ': null;
+  })
+
  id += 1;
+ calendarNumber += 1;
+ numberCalendarOpenTag.innerHTML = calendarNumber;
+ calendarNumber > 0 ? numberCalendarOpenTag.style.visibility = "visible":numberCalendarOpenTag.style.visibility = "hidden";
+}
+
+/*traffic light*/
+trafficLightNumber = 0;
+function trafficLight(){
+  canvas("200px","300px","#fff",id,"0","0");
+  let traffic = document.getElementById(id);
+  let closeButton = document.createElement("button");
+  let trafficImage = document.createElement("img");
+  let redLight = document.createElement('div');
+  let yellowLight = document.createElement('div');
+  let greenLight = document.createElement('div');
+  let numberTrafficOpenTag = document.querySelector(".traffic-ele-open");
+
+  trafficImage.src = "/images/traffic.png";
+  trafficImage.classList.add("traffic-image");
+  traffic.classList.add("rounded-divs");
+
+  redLight.classList.add("lights","red-light");
+  yellowLight.classList.add("lights","yellow-light");
+  greenLight.classList.add("lights","green-light");
+
+  closeButton.classList.add("small-button","fa-solid","fa-xmark");
+  traffic.style.position = "absolute";
+  traffic.appendChild(closeButton);
+  traffic.appendChild(trafficImage);
+  traffic.appendChild(redLight);
+  traffic.appendChild(yellowLight);
+  traffic.appendChild(greenLight);
+
+  redLight.addEventListener('click',()=>{
+    redLight.style.backgroundColor = "#e62807";
+    yellowLight.style.backgroundColor = "#3d2d02";
+    greenLight.style.backgroundColor = "#023313";
+  })
+  yellowLight.addEventListener('click',()=>{
+    redLight.style.backgroundColor = "#3d0906";
+    yellowLight.style.backgroundColor = "#faea0a";
+    greenLight.style.backgroundColor = "#023313";
+  })
+  greenLight.addEventListener('click',()=>{
+    redLight.style.backgroundColor = "#3d0906";
+    yellowLight.style.backgroundColor = "#3d2d02";
+    greenLight.style.backgroundColor = "#07e86c";
+  })
+ 
+   /*drag*/
+   traffic.onmousedown = function(){
+    dragValue = traffic;
+    traffic.style.zIndex = "100";
+  }
+  
+  document.onmouseup = function(e){
+  dragValue = null;
+  traffic.style.zIndex = "0";
+  }
+  document.onmousemove = function(e){
+  let x = e.pageX ;
+  let y = e.pageY ;
+  
+  dragValue.style.left = x + "px";
+  dragValue.style.top = y + "px";
+  }
+
+  /*close*/
+  closeButton.addEventListener('click',()=>{
+    if(id === id){
+    traffic.classList.add("animate-deleting-editor");
+    setTimeout(()=>{
+      traffic.remove();
+      id--;
+      trafficLightNumber--;
+    numberTrafficOpenTag.innerHTML = trafficLightNumber;
+    trafficLightNumber > 0 ? numberCalendarOpenTag.style.visibility = "visible":numberTrafficOpenTag.style.visibility = "hidden";
+    },200)
+  
+  }
+  })
+ 
+  id += 1;
+ trafficLightNumber += 1;
+ numberTrafficOpenTag.innerHTML = trafficLightNumber;
+ trafficLightNumber > 0 ? numberTrafficOpenTag.style.visibility = "visible":numberTrafficOpenTag.style.visibility = "hidden";
+}
+
+/*Random number*/
+randomNameNumber = 0;
+function RandomName(){
+  canvas("400px","400px","#fff",id,"0","0");
+  let randomNameContainer = document.getElementById(id);
+  let deleteButton =  document.createElement('button');
+  let randomInput = document.createElement('textarea');
+  let randomResult = document.createElement('div');
+  let randomButton = document.createElement('button');
+  let result = document.createElement('p');
+  let numberOfName = document.createElement('p');
+
+  randomNameContainer.classList.add("random-name-container","rounded-divs");
+  randomInput.classList.add("random-input");
+  deleteButton.classList.add("small-button","fa-solid","fa-xmark");
+  randomResult.classList.add("random-result");
+  randomButton.classList.add("random-button")
+  numberOfName.classList.add("number-of-name");
+  deleteButton.style.marginLeft = "-30px";
+
+  randomInput.placeholder ="Type one name per line..";
+  randomButton.innerHTML = "Choose";
+
+  randomNameContainer.appendChild(deleteButton);
+  randomNameContainer.appendChild(randomInput);
+  randomResult.appendChild(randomButton);
+  randomResult.appendChild(result);
+  randomResult.appendChild(numberOfName);
+  randomNameContainer.appendChild(randomResult);
+   /*drag*/
+   randomNameContainer.style.position = "absolute";
+   
+   let names = [];
+   
+   randomInput.addEventListener('keydown',(ev)=>{
+    if(ev.key === "Enter"){
+      names.push(randomInput.value);
+      randomInput.value = '';
+    }
+   })
+   
+   
+    randomButton.addEventListener('click',()=>{
+      let random = Math.floor(Math.random() * names.length);
+      if(names != ""){
+        names .length < 2 ? result.innerHTML = "add 1 more name" : result.innerHTML = names[random];  
+         names.splice(random,1);
+         numberOfName = names.length;
+         console.log(names);
+      }
+    })
+  
+   randomNameContainer.onmousedown = function(){
+    dragValue = randomNameContainer;
+    randomNameContainer.style.zIndex = "100";
+  }
+  
+  document.onmouseup = function(e){
+  dragValue = null;
+ randomNameContainer.style.zIndex = "0";
+  }
+  document.onmousemove = function(e){
+  let x = e.pageX ;
+  let y = e.pageY ;
+  
+  dragValue.style.left = x + "px";
+  dragValue.style.top = y + "px";
+  }
+
+  /*delete*/
+  deleteButton.addEventListener('click',()=>{
+    if(id === id){
+    randomNameContainer.classList.add("animate-deleting-editor");
+    setTimeout(()=>{
+      randomNameContainer.remove();
+      id--;
+      randomNameNumber--;
+    
+    },200)
+  
+  }
+  })
+
+  id += 1;
 }

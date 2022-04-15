@@ -1,16 +1,16 @@
 .calendar-container{
-  width: 85%;
-  height: 90%;
-  margin:0 auto;
+  width: 95%;
+  height: 56%;
+  margin:140px auto;
   display: grid;
-  grid-template-columns: repeat(7,55px);
-  grid-template-rows:  repeat(5,50px);
-  border: solid 1px #000;
+  grid-template-columns:  40px 40px 40px 40px 40px 40px 40px ;
+  grid-template-rows:  40px 40px 40px 40px 40px;
   text-align: center;
+  box-shadow: 2px 2px 2px #888888;
 }
 .days{
-  border: solid 1px #000;
-  padding: 30% 0;
+  box-shadow: 2px 2px 2px #888888;
+  padding: 25% 0;
   font-weight: bold;
   background-color: #c5fcf5;
   text-align: center;
@@ -19,4 +19,88 @@
   background-color: #added8;
   cursor: pointer;
   color:#fff;
+}
+.current-date-div{
+  position: absolute;
+  width: 100%;
+  height: 140px;
+  background-color:#0e802c;
+  line-height: 45px;
+  text-align: center;
+  top: 0;
+  cursor: move;
+}
+.dates{
+  color: #fff;
+  font-weight: bold;
+}
+.day{
+  font-size:3.0rem;
+}
+.month{
+  font-size: 1.6rem;
+}
+.year{
+  font-size: 1.2rem;
+}
+.calendar-delete-button{
+  position: absolute;
+  left: -15px;
+  top: -10px;
+  z-index: 100;
+}
+.calendar-options{
+  position: absolute;
+  left: 280px;
+  top: -10px;
+}
+/*calendar options*/
+@keyframes calendar-nav-animation {
+  from{width: 0;}
+  to{width: 22%;}
+}
+.calendar-settings-animation{
+   animation-name:calendar-nav-animation;
+   animation-duration: .5s;
+   transition: ease-in-out;
+   animation-timing-function: ease;
+   -webkit-animation-timing-function: ease;
+    animation-fill-mode: forwards;
+   -webkit-animation-fill-mode: forwards;
+}
+.settings-calendar{
+  position:absolute;
+  width: 0;
+  height: 100vh;
+  background-color:#fff;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+}
+.setting-calendar-top{
+  width:90%;
+  height:55px;
+  border-bottom: solid 1px #07fae2;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+.seeting-nav-top-botton{
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  float: right;
+  left: -65px;
+}
+.seeting-nav-top-botton > i{
+  color:#07fae2;
+}
+.setting-nav-top > h2,h5{
+  padding: 15px 0;
+  color:#07fae2;
+  font-size: 2.0rem;
+}
+.calendar-ele-number{
+  box-shadow: 2px 2px 2px #888888;
+  visibility: hidden;
 }

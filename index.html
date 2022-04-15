@@ -9,11 +9,13 @@
   <link rel="stylesheet" href="/css/styles.css">
   <link rel="stylesheet" href="/css/timer.css">
   <link rel="stylesheet" href="/css/calendar.css">
+  <link rel="stylesheet" href="/css/trafficLight.css">
+  <link rel="stylesheet" href="/css/random.css">
   <link rel="stylesheet" href="//cdn.quilljs.com/0.16.0/quill.snow.css" />
   <!--font awesome-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://kit.fontawesome.com/bb736a9cab.js" crossorigin="anonymous"></script>
-
+  
   <!--Quill-->
   <script src="https://cdn.tiny.cloud/1/73lvgqu39yk64tkxmoodlupm07ajm110g4suhdr3nxf52er5/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
   <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
@@ -33,30 +35,29 @@
       <p>Background</p>
     </div>
     <div class="option-name">
-      <p class="number-ele-open"></p>
+      <p class="number-ele-open numer-style"></p>
       <button class="button" onclick="getEditor(this.id)"><i class="fa-solid fa-text-width"></i></button>
       <p>Text</p>
     </div>
+   
     <div class="option-name">
-      <button class="button" ><i class="fa-solid fa-pencil"></i></button>
-      <p>Draw</p>
-    </div>
-    <div class="option-name">
-      <p class="number-ele-open"></p>
+      <p class="timer-ele-open numer-style"></p>
       <button class="button" onclick="timer(this.id)"><i class="fa-solid fa-hourglass"></i></button>
       <p>Timer</p>
     </div>
     <div class="option-name">
+      <p class="calendar-ele-number numer-style"></p>
       <button class="button" onclick="Calendar(this.id)"><i class="fa-solid fa-calendar-days"></i></button>
       <p>Calendar</p>
     </div>
     <div class="option-name">
-      <button class="button"><i class="fa-solid fa-text-width"></i></button>
-      <p>Text</p>
+      <button class="button" onclick="RandomName(this.id)"><i class="fa-solid fa-shuffle"></i></button>
+      <p>Random</p>
     </div>
     <div class="option-name">
-      <button class="button" ><i class="fa-solid fa-text-width"></i></button>
-      <p>Text</p>
+      <p class="traffic-ele-open numer-style"></p>
+      <button class="button" onclick="trafficLight(this.id)" ><i class="fa-solid fa-traffic-light"></i></button>
+      <p>Traffic</p>
     </div>
     <div class="option-name">
       <button class="button"><i class="fa-solid fa-text-width"></i></button>
@@ -78,7 +79,8 @@
 
     <!--background div-->
     <div class="backgrounds-options" id="background-options">
-      <h2>Photos</h2>
+      <button class="small-button" id="close-background-options" onclick="closeBackgroundGrid()"><i class="fa-solid fa-xmark"></i></button>
+      <h2 class="background-options-title">Photos</h2>
       <div class="background-grid">
         <img src="/images/back1.jpg" alt="bac1" class="background-thumb" id="back1" onclick="getNewBackground(this.id)">
         <img src="/images/back2.jpg" alt="bac1" class="background-thumb" id="back2" onclick="getNewBackground(this.id)">
@@ -89,8 +91,17 @@
         <img src="/images/back7.jpg" alt="bac1" class="background-thumb" id="back7" onclick="getNewBackground(this.id)">
         <img src="/images/back8.jpg" alt="bac1" class="background-thumb" id="back8" onclick="getNewBackground(this.id)">
         <img src="/images/back9.jpg" alt="bac1" class="background-thumb" id="back9" onclick="getNewBackground(this.id)">
-        <img src="/images/back1.jpg" alt="bac1" class="background-thumb" id="back10" onclick="getNewBackground(this.id)">
+        <img src="/images/back10.jpg" alt="bac1" class="background-thumb" id="back10" onclick="getNewBackground(this.id)">
+        <img src="/images/back11.jpg" alt="bac1" class="background-thumb" id="back11" onclick="getNewBackground(this.id)">
+        <img src="/images/back12.jpg" alt="bac1" class="background-thumb" id="back12" onclick="getNewBackground(this.id)">
+        <img src="/images/back13.jpg" alt="bac1" class="background-thumb" id="back13" onclick="getNewBackground(this.id)">
+        <img src="/images/back14.jpg" alt="bac1" class="background-thumb" id="back14" onclick="getNewBackground(this.id)">
+        <img src="/images/back15.jpg" alt="bac1" class="background-thumb" id="back15" onclick="getNewBackground(this.id)">
+        <img src="/images/back16.jpg" alt="bac1" class="background-thumb" id="back16" onclick="getNewBackground(this.id)">
+        <img src="/images/back17.jpg" alt="bac1" class="background-thumb" id="back17" onclick="getNewBackground(this.id)">
+        <img src="/images/back18.jpg" alt="bac1" class="background-thumb" id="back18" onclick="getNewBackground(this.id)">
       </div>
+      <!--Animated backgrounds-->
     </div>
 
     <!--text section-->
@@ -122,8 +133,8 @@
       </div>
     </div>
 
-   
-</div>
+    <!--Calendar options-->
+    
 
   </div>
  <script src="/javascript/app.js"></script>

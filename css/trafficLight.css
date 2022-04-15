@@ -1,0 +1,39 @@
+.traffic-image{
+  width: 140px;
+  height: 260px;
+  margin: 0 auto;
+ padding-left: 15%;
+ padding-top: 12%;
+}
+
+.lights{
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+.red-light{
+  position: absolute;
+  margin:0 auto;
+  background-color:#3d0906;
+  top: 30px;
+  left: 60px;
+}
+.yellow-light{
+  position: absolute;
+  margin:0 auto;
+  background-color:#3d2d02;
+  top: 115px;
+  left: 60px;
+}
+.green-light{
+  position: absolute;
+  margin:0 auto;
+  background-color:#023313;
+  top: 200px;
+  left: 60px;
+}
+.traffic-ele-open{
+  box-shadow: 2px 2px 2px #888888;
+  visibility: hidden;
+}

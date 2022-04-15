@@ -19,7 +19,7 @@ body{
 }
 .options__container{
   position: fixed;
-  width: 55%;
+  width:fit-content;
   height: 110px;
   border-radius: 15px;
   background-color:#e8ebe9;
@@ -28,6 +28,9 @@ body{
   right: 0;
   bottom: 0;
   box-shadow: 2px 2px 2px #888888;
+}
+.options__container i{
+  color: cornflowerblue;
 }
 .option-name{
   display: inline-block;
@@ -43,6 +46,7 @@ body{
   border: none;
   margin:0 5px;
   box-shadow: 5px 5px 5px #888888;
+  background-color:transparent;
 }
 .button:hover{
   background-color: #e3e2de;
@@ -65,13 +69,17 @@ body{
   display: none;
   box-shadow: 2px 2px 2px #888888;
   z-index: 1000;
+  border-radius: 5px;
+}
+.background-options-title{
+  margin:30px 0;
 }
 .background-grid{
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto auto auto;
   grid-gap: 0;
-  width: 50%;
-  margin:35px 10px;
+  width: 55%;
+  margin:15px 10px;
 }
 .background-thumb{
   width: 75px;
@@ -80,6 +88,7 @@ body{
   padding: 5px 0;
   cursor: pointer;
 }
+
 /*text area*/
 .the-editor{
   position: absolute;
@@ -149,6 +158,7 @@ body{
   cursor: pointer;
   border:none;
   font-size: 1.5rem;
+  z-index: 100;
 }
 
 .delete-button{
@@ -157,11 +167,7 @@ body{
   top: -12px;
 }
 .fa-x{
-  font-size: 13px;
-}
-
-i{
-  color: darkcyan;
+  font-size: 1.5rem;
 }
 .my-text{
   width: 400px;
@@ -176,6 +182,10 @@ i{
   border-radius: 5px;
 }
 .number-ele-open{
+  box-shadow: 2px 2px 2px #888888;
+  visibility: hidden;
+}
+.numer-style{
   background-color:green;
   border-radius: 100%;
   width: 20px;
@@ -183,7 +193,6 @@ i{
   color: #fff;
   font-weight: bold;
   border: solid 1px #fff;
-  visibility: hidden;
-  box-shadow: 2px 2px 2px #888888;
 }
+
 /*timer*/

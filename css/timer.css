@@ -138,3 +138,7 @@
   margin: 65px  60px;
   color: green;
 }
+.timer-ele-open{
+  box-shadow: 2px 2px 2px #888888;
+  visibility: hidden;
+}
