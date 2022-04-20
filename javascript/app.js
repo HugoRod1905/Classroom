@@ -92,7 +92,7 @@ let getEditor = () =>{
   let x = e.clientX;
   let y = e.clientY;
 
-  dragValue.style.left = x + "px";
+  dragValue.style.left = x - 200 + "px";
   dragValue.style.top = y + "px";
   
  }
@@ -223,8 +223,6 @@ let timerNumber = 0;
     }
 
     if(seconds < 1 && minutes < 1){
-      var audio = new Audio("/sounds/sounds1.mp3");
-     audio.play();
       clearInterval(interval);
     }
      secondFont.innerHTML = seconds;
@@ -325,7 +323,7 @@ let colorPicker = document.querySelectorAll(".color-picker").forEach((item)=>{
   let x = e.pageX ;
   let y = e.pageY ;
 
-  dragValue.style.left = x + "px";
+  dragValue.style.left = x - 200 + "px";
   dragValue.style.top = y + "px";
   
 }
@@ -472,7 +470,7 @@ document.onmousemove = function(e){
 let x = e.pageX ;
 let y = e.pageY ;
 
-dragValue.style.left = x + "px";
+dragValue.style.left = x - 150 + "px";
 dragValue.style.top = y + "px";
 
 }
@@ -566,7 +564,7 @@ function trafficLight(){
   let x = e.pageX ;
   let y = e.pageY ;
   
-  dragValue.style.left = x + "px";
+  dragValue.style.left = x - 100 + "px";
   dragValue.style.top = y + "px";
   }
 
@@ -594,14 +592,15 @@ function trafficLight(){
 /*Random number*/
 randomNameNumber = 0;
 function RandomName(){
-  canvas("400px","400px","#fff",id,"0","0");
+  canvas("400px","430px","#fff",id,"0","0");
   let randomNameContainer = document.getElementById(id);
   let deleteButton =  document.createElement('button');
   let randomInput = document.createElement('textarea');
   let randomResult = document.createElement('div');
+  let posibleOptions = document.createElement('div');
   let randomButton = document.createElement('button');
   let result = document.createElement('p');
-  let numberOfName = document.createElement('p');
+  let numberOfName = document.createElement('h3');
 
   randomNameContainer.classList.add("random-name-container","rounded-divs");
   randomInput.classList.add("random-input");
@@ -609,6 +608,7 @@ function RandomName(){
   randomResult.classList.add("random-result");
   randomButton.classList.add("random-button")
   numberOfName.classList.add("number-of-name");
+  posibleOptions.classList.add('posible-options');
   deleteButton.style.marginLeft = "-30px";
 
   randomInput.placeholder ="Type one name per line..";
@@ -616,47 +616,54 @@ function RandomName(){
 
   randomNameContainer.appendChild(deleteButton);
   randomNameContainer.appendChild(randomInput);
+  randomNameContainer.appendChild(posibleOptions);
   randomResult.appendChild(randomButton);
   randomResult.appendChild(result);
   randomResult.appendChild(numberOfName);
   randomNameContainer.appendChild(randomResult);
-   /*drag*/
-   randomNameContainer.style.position = "absolute";
    
+  /*get random names*/
    let names = [];
    
    randomInput.addEventListener('keydown',(ev)=>{
     if(ev.key === "Enter"){
       names.push(randomInput.value);
+      posibleOptions.innerHTML = "Posible options: " + names;
       randomInput.value = '';
     }
    })
    
-   
+    numberOfName.innerHTML = names.length + "/100";
     randomButton.addEventListener('click',()=>{
       let random = Math.floor(Math.random() * names.length);
+     
       if(names != ""){
-        names .length < 2 ? result.innerHTML = "add 1 more name" : result.innerHTML = names[random];  
+        names.length < 2 ? result.innerHTML = "add more names" : result.innerHTML = names[random];  
          names.splice(random,1);
-         numberOfName = names.length;
-         console.log(names);
+         numberOfName.innerHTML = names.length + "/100";
+         posibleOptions.innerHTML = "Posible options: "+ names;
+         
       }
     })
   
+    /*drag*/
+   randomNameContainer.style.position = "absolute";
    randomNameContainer.onmousedown = function(){
     dragValue = randomNameContainer;
     randomNameContainer.style.zIndex = "100";
+    randomNameContainer.style.cursor= "pointer";
   }
   
   document.onmouseup = function(e){
   dragValue = null;
  randomNameContainer.style.zIndex = "0";
+ randomNameContainer.style.cursor= "";
   }
   document.onmousemove = function(e){
-  let x = e.pageX ;
-  let y = e.pageY ;
+  let x = e.clientX;
+  let y = e.clientY;
   
-  dragValue.style.left = x + "px";
+  dragValue.style.left = x - 200  + "px";
   dragValue.style.top = y + "px";
   }
 
@@ -668,6 +675,130 @@ function RandomName(){
       randomNameContainer.remove();
       id--;
       randomNameNumber--;
+    
+    },200)
+  
+  }
+  })
+
+  id += 1;
+}
+
+/*Stopwatch*/
+let stopWatchNumber = 0;
+function stopWatch(){
+  canvas("450px","180px","#fff",id,"0","0");
+  
+  let stopWatchContainer = document.getElementById(id);
+  let deleteButton = document.createElement('button');
+  let timeContainer = document.createElement('div');
+  let seconds = document.createElement('p');
+  let minutes = document.createElement('p');
+  let hours = document.createElement('p');
+  let startButton = document.createElement('button');
+  let lapButton = document.createElement('button');
+  let clearButton = document.createElement('button');
+  let showLapContainer =  document.createElement('div');
+  let showLap = document.createElement('p');
+  
+  /*add classes to elements*/
+  seconds.classList.add("seconds");
+  minutes.classList.add("minutes");
+  hours.classList.add("hours");
+  startButton.classList.add('random-button','start-stopwatch-btn');
+  lapButton.classList.add("random-button","lap-button");
+  clearButton.classList.add('random-button',"clear-button")
+  deleteButton.classList.add("small-button","fa-solid","fa-xmark","stop-close-watch");
+  timeContainer.classList.add('stopwatch-time-container');
+  stopWatchContainer.classList.add("stop-watch-container");
+  showLapContainer.classList.add("show-lap-container");
+
+  let stopWatchHour = 0;
+  let stopWatchMinutes = 0;
+  let stopWatchSeconds = 0;
+  /*nner html*/
+  startButton.innerHTML = "Start";
+  lapButton.innerHTML = "Lap";
+  clearButton.innerHTML = "Clear";
+  hours.innerHTML = stopWatchHour + ":";
+  minutes.innerHTML = stopWatchMinutes + ":";
+  seconds.innerHTML = stopWatchSeconds;
+
+  /*append children*/
+  stopWatchContainer.appendChild(deleteButton);
+  stopWatchContainer.appendChild(startButton);
+  stopWatchContainer.appendChild(lapButton);
+  stopWatchContainer.appendChild(clearButton);
+  stopWatchContainer.appendChild(timeContainer);
+  timeContainer.appendChild(hours);
+  timeContainer.appendChild(minutes);
+  timeContainer.appendChild(seconds);
+  stopWatchContainer.appendChild(showLapContainer);
+  
+
+  /*stowatch code*/
+
+  function startTimer(){
+    stopWatchSeconds++;
+    if(stopWatchSeconds === 100){
+      stopWatchMinutes++;
+      stopWatchSeconds = 0;
+    }
+    if(stopWatchMinutes > 60){
+      stopWatchHour++;
+      stopWatchMinutes = 0;
+    }
+
+    hours.innerHTML = stopWatchHour + ":";
+    minutes.innerHTML = stopWatchMinutes + ":";
+    seconds.innerHTML = stopWatchSeconds;
+  }
+  
+  startButton.addEventListener('click',()=>{
+     setInterval(startTimer,10);
+  })
+  
+
+  lapButton.addEventListener('click',()=>{
+    stopWatchContainer.classList.add("new-stopwatch-size");
+    let showLap = document.createElement('p');
+    showLap.classList.add("show-lap");
+    showLapContainer.appendChild(showLap);
+    setTimeout(()=>{
+      showLapContainer.style.display = "block";
+    },500);
+  
+    showLap.innerHTML = stopWatchHour +':'+ stopWatchMinutes +':' + stopWatchSeconds;
+  })
+ 
+  /*drag*/
+  stopWatchContainer.style.position = "absolute";
+   stopWatchContainer.onmousedown = function(){
+    dragValue = stopWatchContainer;
+    stopWatchContainer.style.zIndex = "100";
+    stopWatchContainer.style.cursor= "pointer";
+  }
+  
+  document.onmouseup = function(e){
+  dragValue = null;
+ stopWatchContainer.style.zIndex = "0";
+ stopWatchContainer.style.cursor= "";
+  }
+  document.onmousemove = function(e){
+  let x = e.clientX;
+  let y = e.clientY;
+  
+  dragValue.style.left = x - 200  + "px";
+  dragValue.style.top = y + "px";
+  }
+
+  deleteButton.addEventListener('click',()=>{
+    if(id === id){
+    stopWatchContainer.classList.add("animate-deleting-editor");
+    setTimeout(()=>{
+      stopWatchContainer.remove();
+      id--;
+      stopWatchNumber--;
     
     },200)
   

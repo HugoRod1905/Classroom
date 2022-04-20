@@ -1,10 +1,11 @@
 
 .random-name-container{
   text-align: center;
+  box-shadow: #141414 0px 2px 5px;
 }
 .random-name-container textarea{
 width: 340px;
-height: 200px;
+height: 120px;
 margin-top: 45px;
 font-size: 18px;
 resize: none;
@@ -13,7 +14,7 @@ resize: none;
   width: 400px;
   height: 100px;
 }
-.random-result p{
+.random-result > p{
   font-size: 2.5rem;
   margin: 15px auto;
   font-weight: bold;
@@ -26,9 +27,11 @@ resize: none;
   width: 100px;
   height: 40px;
   border-radius: 25px;
-  background-color: chartreuse;
+  background-color: #05780e;
   margin-left: -50px;
   border: none;
+  color: #fff;
+  font-size: 1.2rem;
 }
 .random-input:focus {
   outline: none !important;
@@ -37,4 +40,15 @@ resize: none;
 }
 .random-input:hover{
   background-color:#f2f0f0;
+}
+.number-of-name{
+  font-size: .8rem;
+  margin-top: -20px;
+}
+.posible-options{
+  width: 90%;
+  height: 100px;
+  font-weight: bold;
+  margin:0 auto;
+  box-shadow: 2px 2px 2px 4px #f5f6f7;
 }

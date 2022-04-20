@@ -1,0 +1,54 @@
+.stop-watch-container{
+  position: absolute;
+  box-shadow: #141414 0px 2px 5px;
+}
+.stopwatch-time-container{
+  width: 45%;
+  height: 100px;
+  margin: 0 auto;
+  display: flex;
+  font-size: 5.5rem;
+  font-family: 'Bebas Neue';
+}
+.stopwatch-time-container p{
+  margin: 0 5px;
+}
+
+.start-stopwatch-btn{
+  position: absolute;
+  margin: 120px 40px;
+}
+.lap-button{
+  position: absolute;
+  margin: 120px 175px;
+}
+.clear-button{
+  position: absolute;
+  margin: 120px 305px;
+}
+
+/*animation container*/
+@keyframes stopwatch-container {
+  from {height:180px}
+  to{height:360px}
+}
+.new-stopwatch-size{
+  animation-name:stopwatch-container;
+  animation-duration: .5s;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+}
+.show-lap{
+  font-size: 1.0rem;
+  font-weight: 600;
+}
+.show-lap-container{
+  width: 90%;
+  height: 160px;
+  background-color: darkgreen;
+  margin: 90px auto;
+  color: #fff;
+  text-align: center;
+  display: none;
+  overflow-y: scroll;
+}
