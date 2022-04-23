@@ -4,13 +4,6 @@ function openBackground(){
   getElementId("background-options").style.display = "block";
 }
 
-/*load random backgrounds*/
-window.addEventListener('DOMContentLoaded', (event) => {
-  let backsgrounds = ["/images/back.jpg","/images/back1.jpg","/images/back2.jpg","/images/back3.jpg","/images/back4.jpg","/images/back5.jpg","/images/back6.jpg","/images/back7.jpg","/images/back8.jpg","/images/back9.jpg","/images/back10.jpg","/images/back11.jpg","/images/back12.jpg","/images/back13.jpg","/images/back14.jpg","/images/back15.jpg","/images/back16.jpg"];
-  let random = Math.floor(Math.random() * 17);
-  document.getElementById("container").style.backgroundImage = `url(${backsgrounds[random]})`;
-});
-
 /*get new background image*/
 function getNewBackground(id){
   let baseBackUrl = "/images/";
@@ -19,6 +12,25 @@ function getNewBackground(id){
   document.getElementById("container").style.backgroundImage = `url(${backUrl})`;
   getElementId("background-options").style.display = "none";
 }
+
+
+
+function getNewGifBackground(id){
+  let baseBackUrl = "/GIF/";
+  let endUrl = id + ".gif";
+  let backUrl = baseBackUrl + endUrl
+  document.getElementById("container").style.backgroundImage = `url(${backUrl})`;
+  getElementId("background-options").style.display = "none";
+}
+
+/*load random backgrounds*/
+window.addEventListener('DOMContentLoaded', (event) => {
+  let backsgrounds = ["/images/back.jpg","/images/back1.jpg","/images/back2.jpg","/images/back3.jpg","/images/back4.jpg","/images/back5.jpg","/images/back6.jpg","/images/back7.jpg","/images/back8.jpg","/images/back9.jpg","/images/back10.jpg","/images/back11.jpg","/images/back12.jpg","/images/back13.jpg","/images/back14.jpg","/images/back15.jpg","/images/back16.jpg","/images/back17.jpg","/images/back18.jpg","/images/back19.jpg","/images/back20.jpg","/images/back21.jpg","/images/back22.jpg","/images/back23.jpg","/images/back24.jpg","/images/back25.jpg","/images/back26.jpg","/images/back27.jpg","/images/back28.jpg","/images/back29.jpg","/images/back30.jpg","/images/back31.jpg","/images/back32.jpg","/images/back33.jpg","/images/back34.jpg","/images/back35.jpg"];
+  let random = Math.floor(Math.random() * 35);
+  document.getElementById("container").style.backgroundImage = `url(${backsgrounds[random]})`;
+});
+
+
 function closeBackgroundGrid(){
   document.getElementById("background-options").style.display = "none";
 }
@@ -63,16 +75,17 @@ let getEditor = () =>{
   
   tinymce.init({
     selector: '.my-text',
-    height:450,
+    height:375,
     width:450,
     placeholder: 'Type your text here...',
-    min_height: 450,
+    min_height: 350,
     min_width: 450,
     max_width:450,
     max_height:450,
     resize:'both',
     skin: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'oxide-dark' : 'oxide'),
-    content_css: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default')
+    content_css: (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'default'),
+    statusbar: false,
   });
  
  
@@ -601,7 +614,7 @@ function RandomName(){
   let randomButton = document.createElement('button');
   let result = document.createElement('p');
   let numberOfName = document.createElement('h3');
-
+  let openRandomtag = document.querySelector('.random-ele-number');
   randomNameContainer.classList.add("random-name-container","rounded-divs");
   randomInput.classList.add("random-input");
   deleteButton.classList.add("small-button","fa-solid","fa-xmark");
@@ -675,17 +688,22 @@ function RandomName(){
       randomNameContainer.remove();
       id--;
       randomNameNumber--;
-    
+      openRandomtag.innerHTML = randomNameNumber;
+       randomNameNumber > 0 ? openRandomtag.style.visibility = "visible":openRandomtag.style.visibility = "hidden";
     },200)
   
   }
   })
 
   id += 1;
+  randomNameNumber += 1;
+  openRandomtag.innerHTML = randomNameNumber;
+  randomNameNumber > 0 ? openRandomtag.style.visibility = "visible":openRandomtag.style.visibility = "hidden";
 }
 
 /*Stopwatch*/
 let stopWatchNumber = 0;
+let stopWatchInterval;
 function stopWatch(){
   canvas("450px","180px","#fff",id,"0","0");
   
@@ -700,6 +718,8 @@ function stopWatch(){
   let clearButton = document.createElement('button');
   let showLapContainer =  document.createElement('div');
   let showLap = document.createElement('p');
+  let pauseButton = document.createElement('button');
+  
   
   /*add classes to elements*/
   seconds.classList.add("seconds");
@@ -707,10 +727,11 @@ function stopWatch(){
   hours.classList.add("hours");
   startButton.classList.add('random-button','start-stopwatch-btn');
   lapButton.classList.add("random-button","lap-button");
+  pauseButton.classList.add('random-button','stop-watch-pause-btn');
   clearButton.classList.add('random-button',"clear-button")
   deleteButton.classList.add("small-button","fa-solid","fa-xmark","stop-close-watch");
   timeContainer.classList.add('stopwatch-time-container');
-  stopWatchContainer.classList.add("stop-watch-container");
+  stopWatchContainer.classList.add("stop-watch-container","rounded-divs");
   showLapContainer.classList.add("show-lap-container");
 
   let stopWatchHour = 0;
@@ -723,12 +744,14 @@ function stopWatch(){
   hours.innerHTML = stopWatchHour + ":";
   minutes.innerHTML = stopWatchMinutes + ":";
   seconds.innerHTML = stopWatchSeconds;
+  pauseButton.innerHTML = "Pause";
 
   /*append children*/
   stopWatchContainer.appendChild(deleteButton);
   stopWatchContainer.appendChild(startButton);
   stopWatchContainer.appendChild(lapButton);
   stopWatchContainer.appendChild(clearButton);
+  stopWatchContainer.appendChild(pauseButton);
   stopWatchContainer.appendChild(timeContainer);
   timeContainer.appendChild(hours);
   timeContainer.appendChild(minutes);
@@ -737,7 +760,7 @@ function stopWatch(){
   
 
   /*stowatch code*/
-
+  stopWatchSeconds < 1 ? lapButton.disabled = true : lapButton.disabled = false;
   function startTimer(){
     stopWatchSeconds++;
     if(stopWatchSeconds === 100){
@@ -748,16 +771,32 @@ function stopWatch(){
       stopWatchHour++;
       stopWatchMinutes = 0;
     }
-
+    stopWatchSeconds < 1 ? lapButton.disabled = true : lapButton.disabled = false;
     hours.innerHTML = stopWatchHour + ":";
     minutes.innerHTML = stopWatchMinutes + ":";
     seconds.innerHTML = stopWatchSeconds;
   }
   
   startButton.addEventListener('click',()=>{
-     setInterval(startTimer,10);
+     stopWatchInterval = setInterval(startTimer,10);
+     pauseButton.style.visibility = "visible";
+     startButton.style.visibility = "hidden";
   })
   
+  pauseButton.addEventListener('click',()=>{
+     clearInterval(stopWatchInterval);
+     pauseButton.style.visibility = "hidden";
+     startButton.style.visibility = "visible";
+  })
+  clearButton.addEventListener('click',()=>{
+    stopWatchHour = 0;
+    stopWatchMinutes = 0;
+    stopWatchSeconds = 0;
+    hours.innerHTML = 0 + ":";
+    minutes.innerHTML = 0 + ":";
+    seconds.innerHTML = 0;
+    clearInterval(stopWatchInterval);
+  })
 
   lapButton.addEventListener('click',()=>{
     stopWatchContainer.classList.add("new-stopwatch-size");
@@ -799,6 +838,129 @@ function stopWatch(){
       stopWatchContainer.remove();
       id--;
       stopWatchNumber--;
+    
+    },200)
+  
+  }
+  })
+
+  id += 1;
+}
+
+/*Scores and stars*/
+function getScores(){
+  canvas("450px","180px","#fff",id,"0","0");
+  
+  let scoresContainer = document.getElementById(id);
+  let scoresInputContainer = document.createElement('div');
+  let deleteButton = document.createElement('button');
+  let inputName = document.createElement('input');
+  let inputNumber = document.createElement('input');
+  let enterScores =  document.createElement('button');
+  let getScoresBtn = document.createElement('button');
+  let buttonsContainer = document.createElement('div');
+  let studentScores = document.createElement('div');
+ 
+  /*add classes to element*/
+  deleteButton.classList.add("small-button","fa-solid","fa-xmark");
+  scoresInputContainer.classList.add('scores-input-container');
+  inputNumber.classList.add('input-number');
+  scoresContainer.classList.add('scores-container','rounded-divs');
+  enterScores.classList.add('random-button','enter-scores');
+  getScoresBtn.classList.add('random-button','get-scores-btn');
+  buttonsContainer.classList.add('buttons-container');
+  studentScores.classList.add('students-scores');
+  /*append child elements*/
+  scoresContainer.appendChild(deleteButton);
+  scoresContainer.appendChild(buttonsContainer);
+  buttonsContainer.appendChild(enterScores);
+  buttonsContainer.appendChild(getScoresBtn);
+  scoresContainer.appendChild(scoresInputContainer);
+  scoresInputContainer.appendChild(inputName);
+  scoresInputContainer.appendChild(inputNumber);
+  scoresContainer.appendChild(studentScores);
+  
+
+  /*inner html*/
+  inputName.placeholder = "Enter name..."
+  inputNumber.type = "number";
+  enterScores.innerHTML = "Enter";
+  getScoresBtn.innerHTML = "Show Scores";
+  inputNumber.min = "0";
+  inputNumber.max = "10";
+
+  /*create student object*/
+  
+  let suffix = 0;
+  let scores = [];
+  let students = []
+  enterScores.addEventListener('click',()=>{
+  
+      students[suffix] = {
+        name:"",
+        score:inputNumber.value,
+        addScores: function(){
+          this.name = inputName.value;
+          this.scores = inputNumber.value;
+        }
+      }
+     
+      scores.push(students[suffix]);
+      students[suffix].addScores();
+
+      /*new*/
+      let person = " ";
+   let scoresDiv = document.createElement('div');
+   for(let x in scores){
+     let divWidh = scores[x].score + 0;
+    person += scores[x].name + ": " + scores[x].score + "<br>"  + `<div class="scores-div" style="width: ${divWidh}px"></div>`;
+    studentScores.innerHTML = person;
+  }
+   
+   
+      
+      suffix += 1;
+      inputName.value = "";
+      inputNumber.value = "";
+  })
+  
+  getScoresBtn.addEventListener('click',()=>{
+   
+   scoresContainer.classList.toggle("animate-scores");
+   studentScores.classList.toggle('hide-scores');
+   
+  })
+ 
+ 
+  /*drag*/
+  scoresContainer.style.position = "absolute";
+  scoresContainer.onmousedown = function(){
+    dragValue = scoresContainer;
+    scoresContainer.style.zIndex = "100";
+    scoresContainer.style.cursor= "pointer";
+  }
+  
+  document.onmouseup = function(e){
+  dragValue = null;
+ scoresContainer.style.zIndex = "0";
+ scoresContainer.style.cursor= "";
+  }
+  document.onmousemove = function(e){
+  let x = e.clientX;
+  let y = e.clientY;
+  
+  dragValue.style.left = x - 200  + "px";
+  dragValue.style.top = y + "px";
+  }
+
+  /*delete*/
+  deleteButton.addEventListener('click',()=>{
+    if(id === id){
+    scoresContainer.classList.add("animate-deleting-editor");
+    setTimeout(()=>{
+      scoresContainer.remove();
+      id--;
+     
     
     },200)
   

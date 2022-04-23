@@ -12,10 +12,12 @@
   <link rel="stylesheet" href="/css/trafficLight.css">
   <link rel="stylesheet" href="/css/random.css">
   <link rel="stylesheet" href="/css/stopwatch.css">
+  <link rel="stylesheet" href="/css/scores.css">
   <link rel="stylesheet" href="//cdn.quilljs.com/0.16.0/quill.snow.css" />
   <!--font awesome-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script src="https://kit.fontawesome.com/bb736a9cab.js" crossorigin="anonymous"></script>
+  
   
   <!--Quill-->
   <script src="https://cdn.tiny.cloud/1/73lvgqu39yk64tkxmoodlupm07ajm110g4suhdr3nxf52er5/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
@@ -27,53 +29,56 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@200&display=swap" rel="stylesheet">
 
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
 </head>
 <bod >
   <div class="container" id="container">
    <div class="options__container">
       <div class="option-name">
-      <button class="button" onclick="openBackground()"><i class="fa-solid fa-image"></i></button>
+      <button class="button" onclick="openBackground()"><i class="fa-solid fa-image fa-2x"></i></button>
       <p>Background</p>
     </div>
     <div class="option-name">
       <p class="number-ele-open numer-style"></p>
-      <button class="button" onclick="getEditor(this.id)"><i class="fa-solid fa-text-width"></i></button>
+      <button class="button" onclick="getEditor(this.id)"><i class="fa-solid fa-text-width fa-2x" aria-hidden="true"></i></button>
       <p>Text</p>
     </div>
    
     <div class="option-name">
       <p class="timer-ele-open numer-style"></p>
-      <button class="button" onclick="timer(this.id)"><i class="fa-solid fa-hourglass"></i></button>
+      <button class="button" onclick="timer(this.id)"><i class="fa-solid fa-hourglass fa-2x"></i></button>
       <p>Timer</p>
     </div>
     <div class="option-name">
       <p class="calendar-ele-number numer-style"></p>
-      <button class="button" onclick="Calendar(this.id)"><i class="fa-solid fa-calendar-days"></i></button>
+      <button class="button" onclick="Calendar(this.id)"><i class="fa-solid fa-calendar-days fa-2x"></i></button>
       <p>Calendar</p>
     </div>
     <div class="option-name">
-      <button class="button" onclick="RandomName(this.id)"><i class="fa-solid fa-shuffle"></i></button>
+      <p class="random-ele-number numer-style"></p>
+      <button class="button" onclick="RandomName(this.id)"><i class="fa-solid fa-shuffle fa-2x"></i></button>
       <p>Random</p>
     </div>
     <div class="option-name">
       <p class="traffic-ele-open numer-style"></p>
-      <button class="button" onclick="trafficLight(this.id)" ><i class="fa-solid fa-traffic-light"></i></button>
+      <button class="button" onclick="trafficLight(this.id)" ><i class="fa-solid fa-traffic-light fa-2x"></i></button>
       <p>Traffic</p>
     </div>
     <div class="option-name">
-      <button class="button" onclick="stopWatch(this.id)"><i class="fa-solid fa-stopwatch"></i></button>
+      <button class="button" onclick="stopWatch(this.id)"><i class="fa-solid fa-stopwatch fa-2x"></i></button>
       <p>Stopwatch</p>
     </div>
     <div class="option-name">
-      <button class="button" ><i class="fa-solid fa-text-width"></i></button>
+      <button class="button" ><i class="fa-solid fa-star fa-2x" onclick="getScores()"></i></button>
+      <p>Scores</p>
+    </div>
+    <div class="option-name">
+      <button class="button" ><i class="fa-solid fa-text-width fa-2x"></i></button>
       <p>Text</p>
     </div>
     <div class="option-name">
-      <button class="button" ><i class="fa-solid fa-text-width"></i></button>
-      <p>Text</p>
-    </div>
-    <div class="option-name">
-      <button class="button" ><i class="fa-solid fa-text-width"></i></button>
+      <button class="button" ><i class="fa-solid fa-text-width fa-2x"></i></button>
       <p>Text</p>
     </div>
     </div>
@@ -83,26 +88,55 @@
       <button class="small-button" id="close-background-options" onclick="closeBackgroundGrid()"><i class="fa-solid fa-xmark"></i></button>
       <h2 class="background-options-title">Photos</h2>
       <div class="background-grid">
-        <img src="/images/back1.jpg" alt="bac1" class="background-thumb" id="back1" onclick="getNewBackground(this.id)">
-        <img src="/images/back2.jpg" alt="bac1" class="background-thumb" id="back2" onclick="getNewBackground(this.id)">
-        <img src="/images/back3.jpg" alt="bac1" class="background-thumb" id="back3" onclick="getNewBackground(this.id)">
-        <img src="/images/back4.jpg" alt="bac1" class="background-thumb" id="back4" onclick="getNewBackground(this.id)">
-        <img src="/images/back5.jpg" alt="bac1" class="background-thumb" id="back5" onclick="getNewBackground(this.id)">
-        <img src="/images/back6.jpg" alt="bac1" class="background-thumb" id="back6" onclick="getNewBackground(this.id)">
-        <img src="/images/back7.jpg" alt="bac1" class="background-thumb" id="back7" onclick="getNewBackground(this.id)">
-        <img src="/images/back8.jpg" alt="bac1" class="background-thumb" id="back8" onclick="getNewBackground(this.id)">
-        <img src="/images/back9.jpg" alt="bac1" class="background-thumb" id="back9" onclick="getNewBackground(this.id)">
-        <img src="/images/back10.jpg" alt="bac1" class="background-thumb" id="back10" onclick="getNewBackground(this.id)">
-        <img src="/images/back11.jpg" alt="bac1" class="background-thumb" id="back11" onclick="getNewBackground(this.id)">
-        <img src="/images/back12.jpg" alt="bac1" class="background-thumb" id="back12" onclick="getNewBackground(this.id)">
-        <img src="/images/back13.jpg" alt="bac1" class="background-thumb" id="back13" onclick="getNewBackground(this.id)">
-        <img src="/images/back14.jpg" alt="bac1" class="background-thumb" id="back14" onclick="getNewBackground(this.id)">
-        <img src="/images/back15.jpg" alt="bac1" class="background-thumb" id="back15" onclick="getNewBackground(this.id)">
-        <img src="/images/back16.jpg" alt="bac1" class="background-thumb" id="back16" onclick="getNewBackground(this.id)">
-        <img src="/images/back17.jpg" alt="bac1" class="background-thumb" id="back17" onclick="getNewBackground(this.id)">
-        <img src="/images/back18.jpg" alt="bac1" class="background-thumb" id="back18" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back1.jpg" alt="bac1" class="background-thumb" id="back1" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back2.jpg" alt="bac1" class="background-thumb" id="back2" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back3.jpg" alt="bac1" class="background-thumb" id="back3" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back4.jpg" alt="bac1" class="background-thumb" id="back4" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back5.jpg" alt="bac1" class="background-thumb" id="back5" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back6.jpg" alt="bac1" class="background-thumb" id="back6" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back7.jpg" alt="bac1" class="background-thumb" id="back7" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back8.jpg" alt="bac1" class="background-thumb" id="back8" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back9.jpg" alt="bac1" class="background-thumb" id="back9" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back10.jpg" alt="bac1" class="background-thumb" id="back10" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back11.jpg" alt="bac1" class="background-thumb" id="back11" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back12.jpg" alt="bac1" class="background-thumb" id="back12" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back13.jpg" alt="bac1" class="background-thumb" id="back13" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back14.jpg" alt="bac1" class="background-thumb" id="back14" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back15.jpg" alt="bac1" class="background-thumb" id="back15" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back16.jpg" alt="bac1" class="background-thumb" id="back16" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back17.jpg" alt="bac1" class="background-thumb" id="back17" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back18.jpg" alt="bac1" class="background-thumb" id="back18" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back19.jpg" alt="bac1" class="background-thumb" id="back19" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back20.jpg" alt="bac1" class="background-thumb" id="back20" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back21.jpg" alt="bac1" class="background-thumb" id="back21" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back22.jpg" alt="bac1" class="background-thumb" id="back22" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back23.jpg" alt="bac1" class="background-thumb" id="back23" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back24.jpg" alt="bac1" class="background-thumb" id="back24" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back25.jpg" alt="bac1" class="background-thumb" id="back25" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back26.jpg" alt="bac1" class="background-thumb" id="back26" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back27.jpg" alt="bac1" class="background-thumb" id="back27" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back28.jpg" alt="bac1" class="background-thumb" id="back28" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back29.jpg" alt="bac1" class="background-thumb" id="back29" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back30.jpg" alt="bac1" class="background-thumb" id="back30" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back31.jpg" alt="bac1" class="background-thumb" id="back31" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back32.jpg" alt="bac1" class="background-thumb" id="back32" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back33.jpg" alt="bac1" class="background-thumb" id="back33" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back34.jpg" alt="bac1" class="background-thumb" id="back34" onclick="getNewBackground(this.id)">
+        <img src="/images/thumb-back35.jpg" alt="bac1" class="background-thumb" id="back35" onclick="getNewBackground(this.id)">
       </div>
       <!--Animated backgrounds-->
+      <div class="animated-backgrounds">
+        <p class="animated-backs-title">Animated background</p>
+        <div class="animated-back-container">
+        <img src="/GIF/animated-thumb1.jpg" alt="back1"  class="background-thumb" id="back1" onclick="getNewGifBackground(this.id)" >
+        <img src="/GIF/animated-thumb2.jpg" alt="back2"  class="background-thumb" id="back2" onclick="getNewGifBackground(this.id)" >
+        <img src="/GIF/animated-thumb3.jpg" alt="back3"  class="background-thumb" id="back3" onclick="getNewGifBackground(this.id)" >
+        <img src="/GIF/animated-thumb4.jpg" alt="back4"  class="background-thumb" id="back4" onclick="getNewGifBackground(this.id)" >
+        <img src="/GIF/animated-thumb5.jpg" alt="back5"  class="background-thumb" id="back5" onclick="getNewGifBackground(this.id)" >
+        <img src="/GIF/animated-thumb6.jpg" alt="back6"  class="background-thumb" id="back6" onclick="getNewGifBackground(this.id)" >
+        <img src="/GIF/animated-thumb7.jpg" alt="back7"  class="background-thumb" id="back7" onclick="getNewGifBackground(this.id)" >
+      </div>
+      </div>
     </div>
 
     <!--text section-->

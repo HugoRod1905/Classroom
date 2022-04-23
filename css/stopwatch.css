@@ -26,6 +26,12 @@
   position: absolute;
   margin: 120px 305px;
 }
+.stop-watch-pause-btn{
+  position: absolute;
+  margin: 120px 40px;
+  background-color: coral;
+  visibility: hidden;
+}
 
 /*animation container*/
 @keyframes stopwatch-container {
@@ -52,3 +58,4 @@
   display: none;
   overflow-y: scroll;
 }
+.random-ele-number{visibility: hidden;}

@@ -14,9 +14,7 @@ body{
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size:cover;
 }
-.fa-solid{
-  font-size: 2.5rem;
-}
+
 .options__container{
   position: fixed;
   width:fit-content;
@@ -27,26 +25,26 @@ body{
   left: 0;
   right: 0;
   bottom: 0;
-  box-shadow: 2px 2px 2px #888888;
+  box-shadow: 2px 2px 2px #000;
 }
-.options__container i{
-  color: cornflowerblue;
-}
+
 .option-name{
   display: inline-block;
   padding: 0px 5px;
   text-align: center;
   justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 .button{
   width: 55px;
   height: 55px;
   border-radius:100% ;
-  border: none;
   margin:0 5px;
-  box-shadow: 5px 5px 5px #888888;
+  box-shadow: 2px 2px 2px #888888;
   background-color:transparent;
+  border: solid .2px #c7c7c7;
 }
 .button:hover{
   background-color: #e3e2de;
@@ -87,6 +85,18 @@ body{
   border-radius:7px;
   padding: 5px 0;
   cursor: pointer;
+}
+
+/*animated backgrounds*/
+.animated-backs-title{
+  font-weight: bold;
+}
+.animated-back-container{
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto;
+  grid-gap: 0;
+  width: 55%;
+  margin:15px 10px;
 }
 
 /*text area*/
@@ -176,7 +186,7 @@ body{
 }
 .text-editor-options{
   position: absolute;
-  margin:-510px 425px;
+  margin:-440px 425px;
 }
 .rounded-divs{
   border-radius: 5px;
@@ -195,4 +205,25 @@ body{
   border: solid 1px #fff;
 }
 
-/*timer*/
+/*option buttons color*/
+.fa-image{
+  color: #f28029;
+}
+.fa-hourglass{
+  color:#56a4a6;
+}
+.fa-calendar-days{
+  color: #d92935;
+}
+.fa-shuffle{
+  color:#204f26;
+}
+.fa-traffic-light{
+  color: #6205f7;
+}
+.fa-stopwatch{
+  color: #fa987d;
+}
+.fa-star{
+  color:#02eb82;
+}

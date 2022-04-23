@@ -1,0 +1,64 @@
+.scores-container{
+  box-shadow: #141414 0px 2px 5px;
+}
+.scores-input-container{
+  width: 60%;
+  height: 100px;
+  margin: 40px 15px;
+}
+
+.scores-input-container > input{
+  width: 265px;
+  height: 25px;
+  margin: 5px 0;
+  border: none;
+  border-bottom: solid .5px #000;
+  outline: none;
+}
+.input-number{
+  width: 50px !important;
+}
+.buttons-container{
+  position: absolute;
+  width: 35%;
+  height: 100px;
+  margin: 40px 65%;
+  text-align: center;
+}
+.get-scores-btn{
+  position: absolute;
+  margin-top: 45px;
+}
+
+.students-scores{
+  width: 90%;
+  height: 300px;
+  background-color: #fff;
+  box-shadow: #141414 0px 2px 5px;
+  visibility: hidden;
+  margin: 0 auto;
+  font-size: 1.0rem;
+  font-weight: bold;
+  color: blue;
+  height: fit-content;
+}
+/*scores animation*/
+@keyframes scores-animation{
+  from{height:180px;}
+  to{height:500px}
+}
+.animate-scores{
+  animation-name:scores-animation;
+  animation-duration: 0s;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+}
+.hide-scores{
+  visibility: visible;
+}
+.scores-div{
+  height: 20px;
+  background-color:#05f02c;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
