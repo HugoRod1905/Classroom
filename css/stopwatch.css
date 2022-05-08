@@ -58,4 +58,7 @@
   display: none;
   overflow-y: scroll;
 }
-.random-ele-number{visibility: hidden;}
+.stopwatch-ele-number{
+  visibility: hidden;
+  box-shadow: 2px 2px 2px #888888;
+}

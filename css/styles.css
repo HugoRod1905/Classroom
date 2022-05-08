@@ -42,7 +42,6 @@ body{
   height: 55px;
   border-radius:100% ;
   margin:0 5px;
-  box-shadow: 2px 2px 2px #888888;
   background-color:transparent;
   border: solid .2px #c7c7c7;
 }
@@ -70,14 +69,15 @@ body{
   border-radius: 5px;
 }
 .background-options-title{
-  margin:30px 0;
+  position: absolute;
+  margin:60px 0;
 }
 .background-grid{
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto;
   grid-gap: 0;
   width: 55%;
-  margin:15px 10px;
+  margin:95px 10px;
 }
 .background-thumb{
   width: 75px;
@@ -89,14 +89,16 @@ body{
 
 /*animated backgrounds*/
 .animated-backs-title{
+  position: absolute;
   font-weight: bold;
+  margin:-30px 10px;
 }
 .animated-back-container{
   display: grid;
   grid-template-columns: auto auto auto auto auto auto auto;
   grid-gap: 0;
   width: 55%;
-  margin:15px 10px;
+  margin:-30px 10px;
 }
 
 /*text area*/
@@ -226,4 +228,7 @@ body{
 }
 .fa-star{
   color:#02eb82;
+}
+.fa-youtube{
+  color: #fc031c;
 }

@@ -1,7 +1,9 @@
 
 .random-name-container{
   text-align: center;
-  box-shadow: #141414 0px 2px 5px;
+  box-shadow: #141414 0px 1px 1px;
+  border: none;
+  cursor: grab;
 }
 .random-name-container textarea{
 width: 340px;
@@ -51,4 +53,8 @@ resize: none;
   font-weight: bold;
   margin:0 auto;
   box-shadow: 2px 2px 2px 4px #f5f6f7;
+}
+.random-ele-number{
+  visibility: hidden;
+  box-shadow: 2px 2px 2px #888888;
 }

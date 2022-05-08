@@ -40,7 +40,9 @@
   font-size: 1.0rem;
   font-weight: bold;
   color: blue;
-  height: fit-content;
+  overflow: auto;
+  scrollbar-color: rebeccapurple green;
+  scrollbar-width: thin;
 }
 /*scores animation*/
 @keyframes scores-animation{
@@ -57,8 +59,18 @@
   visibility: visible;
 }
 .scores-div{
-  height: 20px;
-  background-color:#05f02c;
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  height: 35px;
+  width: 90%;
+  border:solid 1px #000;
+  margin-bottom: 5px;
+  margin: 0 auto;
+}
+
+.scores-ele-number{
+  visibility: hidden;
+  box-shadow: 2px 2px 2px #888888;
+}
+.colored-div{
+  height: 30px;
+  background-color: green;
 }

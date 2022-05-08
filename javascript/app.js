@@ -1,4 +1,6 @@
 
+
+
 const getElementId = (element) => document.getElementById(element)
 function openBackground(){
   getElementId("background-options").style.display = "block";
@@ -11,9 +13,48 @@ function getNewBackground(id){
   let backUrl = baseBackUrl + endUrl
   document.getElementById("container").style.backgroundImage = `url(${backUrl})`;
   getElementId("background-options").style.display = "none";
+  document.getElementById(id).style.border = "solid 1px green";
 }
 
+/*drag elements function*/
+function dragElements(ele){
+  ele.onmousedown = function(){
+    dragValue = ele;
+    ele.style.zIndex = "100";
+    ele.style.cursor= "grabbing";
+  }
+  
+  document.onmouseup = function(e){
+  dragValue = null;
+ ele.style.zIndex = "0";
+ ele.style.cursor= "";
+  }
+  document.onmousemove = function(e){
+  let x = e.clientX;
+  let y = e.clientY;
+  
+  dragValue.style.left = x - 200  + "px";
+  dragValue.style.top = y + "px";
+  }
+}
 
+/*delete elements function*/
+function deleteElements(ele,elenumber,elenumberTag,id){
+ 
+    if(id === id){
+    ele.classList.add("animate-deleting-editor");
+    setTimeout(()=>{
+      ele.remove();
+      id--;
+       elenumber--;
+       elenumberTag.innerHTML = elenumber;
+       console.log(elenumber);
+       elenumber > 0 ? elenumberTag.style.visibility = "visible":elenumberTag.style.visibility = "hidden";
+    },200)
+  }
+ 
+  
+}
 
 function getNewGifBackground(id){
   let baseBackUrl = "/GIF/";
@@ -29,7 +70,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
   let random = Math.floor(Math.random() * 35);
   document.getElementById("container").style.backgroundImage = `url(${backsgrounds[random]})`;
 });
-
 
 function closeBackgroundGrid(){
   document.getElementById("background-options").style.display = "none";
@@ -71,8 +111,6 @@ let getEditor = () =>{
   textEditor.appendChild(textEditorOptionButton);
  
   /*textarea creation*/
- 
-  
   tinymce.init({
     selector: '.my-text',
     height:375,
@@ -88,51 +126,24 @@ let getEditor = () =>{
     statusbar: false,
   });
  
- 
   let ele = getElementId(id);
   ele.style.position = "absolute";
   
-  ele.onmousedown = function(){
-    dragValue = ele;
-    ele.style.zIndex = "100";
-  }
-
- document.onmouseup = function(e){
-  dragValue = null;
-  ele.style.zIndex = "0";
- }
- document.onmousemove = function(e){
-  let x = e.clientX;
-  let y = e.clientY;
-
-  dragValue.style.left = x - 200 + "px";
-  dragValue.style.top = y + "px";
-  
- }
-
-/*delete editor*/
-  deleteButton.addEventListener('click',()=>{
-    if(id === id){
-    textEditor.classList.add("animate-deleting-editor");
-    setTimeout(()=>{
-      textEditor.remove();
-      id--;
-      editorNumber--;
-      numberEleOpenTag.innerHTML = editorNumber;
-      editorNumber > 0 ? numberEleOpenTag.style.visibility = "visible":numberEleOpenTag.style.visibility = "hidden";
-    },200)
-  
-  }
-})
+  dragElements(ele);
 
  id += 1;
  editorNumber += 1;
- numberEleOpenTag.innerHTML =editorNumber;
- editorNumber > 0 ? numberEleOpenTag.style.visibility = "visible":numberEleOpenTag.style.visibility = "hidden"
+ console.log(editorNumber);
+/*delete editor*/
+deleteButton.addEventListener('click',()=>{
+  deleteElements(textEditor,editorNumber,numberEleOpenTag,id);
+  editorNumber--;
+})
+ 
+  numberEleOpenTag.innerHTML =editorNumber;
+  editorNumber > 0 ? numberEleOpenTag.style.visibility = "visible":numberEleOpenTag.style.visibility = "hidden"
 }
-
 /*create canvas to reuse*/
-
 let canvas = (width,height,background,id,posLeft,posHeight)=>{
     let canvas = document.createElement("div");
     let container = document.getElementById("drag-container");
@@ -144,13 +155,11 @@ let canvas = (width,height,background,id,posLeft,posHeight)=>{
     canvas.setAttribute('id',id);
     container.appendChild(canvas);
 }
-
 /*create timer*/
 let timerNumber = 0;
  function timer(){
    canvas("400px","180px","#fff",id,"0px","0px");
    let timer1 = document.getElementById(id);
-  
   let deleteButton = document.createElement('button');
   let timerOption = document.createElement('button');
   let timerAndButtonDiv =  document.createElement("div");
@@ -168,25 +177,19 @@ let timerNumber = 0;
 
   deleteButton.classList.add("small-button","delete-button","fa-solid","fa-xmark");
   timerAndButtonDiv.classList.add("timerAndButtonDiv");
-  timer1.classList.add("rounded-divs");
+  timer1.classList.add("rounded-divs","timer");
   /* timer buttons*/
   plusTimerButton.classList.add("plus-minute","timer-inside-button","fa-solid","fa-plus");
- 
   minusTimerButton.classList.add("minus-minute","fa-solid","fa-minus","timer-inside-button");
-
   timerOption.classList.add("small-button","timer-options","fa-solid","fa-gear");
-  
   minuteFont.classList.add("minute-font","timer-font");
   secondFont.classList.add("timer-font","second-font");
-
   plusSecondButton.classList.add("timer-inside-button","fa-solid","fa-plus","plus-second-button");
   minusSecondButton.classList.add("timer-inside-button","fa-solid","fa-minus","minus-second-button")
-
   startTimerButton.classList.add("fa-solid","fa-play","small-button","start-timer-button");
   pauseTimerButton.classList.add("fa-solid","fa-pause","small-button","puase-timer-button");
   timerRefreshButton.classList.add("fa-solid","fa-arrows-rotate","small-button","refresh-timer-button");
 
-  
   let minutes = 0;
   let seconds = 0;
   let interval;
@@ -194,7 +197,6 @@ let timerNumber = 0;
   minuteFont.innerHTML = minutes + ":";
   secondFont.innerHTML = seconds;
   plusTimerButton.addEventListener('click',()=>{
-    
       minutes++;
       if(minutes >= 60){
         minutes = 60;
@@ -225,7 +227,6 @@ let timerNumber = 0;
   }
   secondFont.innerHTML = seconds;
   })
-
   /*Set timer function*/
    function startTimer(){
      seconds--;
@@ -280,7 +281,6 @@ let timerNumber = 0;
     optionsCanvas.classList.toggle("settings-animation")
   })
 
-  
   /*get background color bottom, it gets the id to generate the color*/
 let colorPicker = document.querySelectorAll(".color-picker").forEach((item)=>{
   item.addEventListener('click',()=>{
@@ -319,47 +319,17 @@ let colorPicker = document.querySelectorAll(".color-picker").forEach((item)=>{
     optionsCanvas.classList.remove("settings-animation");
   })
 
-  
- 
   timer1.style.position = "absolute";
-  
-  timer1.onmousedown = function(){
-    dragValue = timer1;
-    timer1.style.zIndex = "100";
-  }
-
- document.onmouseup = function(e){
-  dragValue = null;
-  timer1.style.zIndex = "0";
- }
- document.onmousemove = function(e){
-  let x = e.pageX ;
-  let y = e.pageY ;
-
-  dragValue.style.left = x - 200 + "px";
-  dragValue.style.top = y + "px";
-  
-}
-
-deleteButton.addEventListener('click',()=>{
-  if(id === id){
-  timer1.classList.add("animate-deleting-editor");
-  setTimeout(()=>{
-    timer1.remove();
-    id--;
+  dragElements(timer1);
+  deleteButton.addEventListener('click',()=>{
+    deleteElements(timer1,timerNumber,numberTimerOpenTag,id);
     timerNumber--;
-    numberTimerOpenTag.innerHTML = timerNumber;
-    timerNumber > 0 ? numberTimerOpenTag.style.visibility = "visible":numberTimerOpenTag.style.visibility = "hidden";
-  },200)
-
-}
-})
-
- id += 1;
- timerNumber += 1;
- console.log(timerNumber);
- numberTimerOpenTag.innerHTML = timerNumber;
- timerNumber > 0 ? numberTimerOpenTag.style.visibility = "visible":numberTimerOpenTag.style.visibility = "hidden";
+  })
+  id += 1;
+  timerNumber += 1;
+  console.log(timerNumber);
+  numberTimerOpenTag.innerHTML = timerNumber;
+  timerNumber > 0 ? numberTimerOpenTag.style.visibility = "visible":numberTimerOpenTag.style.visibility = "hidden";
 }
 
 /*Calendar*/
@@ -419,9 +389,9 @@ switch(month1){
   default:
 }
 
-day.innerHTML = day1;
+ day.innerHTML = day1;
 
-year.innerHTML = year1;
+ year.innerHTML = year1;
 
  deleteButton.classList.add("small-button","fa-solid","fa-xmark")
  currentDateDiv.classList.add("current-date-div");
@@ -469,43 +439,15 @@ year.innerHTML = year1;
   })
 })
  
-
- calendar.onmousedown = function(){
-  dragValue = calendar;
-  calendar.style.zIndex = "100";
-}
-
-document.onmouseup = function(e){
-dragValue = null;
-calendar.style.zIndex = "0";
-}
-document.onmousemove = function(e){
-let x = e.pageX ;
-let y = e.pageY ;
-
-dragValue.style.left = x - 150 + "px";
-dragValue.style.top = y + "px";
-
-}
-
+ dragElements(calendar);
+/*delete*/
 deleteButton.addEventListener('click',()=>{
-  if(id === id){
-  calendar.classList.add("animate-deleting-editor");
-  setTimeout(()=>{
-    calendar.remove();
-    id--;
-    
-    calendarNumber--;
-    numberCalendarOpenTag.innerHTML = calendarNumber;
-    calendarNumber > 0 ? numberCalendarOpenTag.style.visibility = "visible":numberCalendarOpenTag.style.visibility = "hidden";
-  },200)
-
-}
+  deleteElements(calendar,calendarNumber,numberCalendarOpenTag,calendarId);
+ calendarNumber--;
 })
-
+/*make Calendar*/
 for(let dayCount = 1; dayCount < 32;dayCount++){
   calendarContainer.insertAdjacentHTML("beforeend",`<div class="days">${dayCount}</div>`)
-  
 }
 
 let currentDay = document.querySelectorAll(".days");
@@ -522,7 +464,7 @@ let currentDay = document.querySelectorAll(".days");
 /*traffic light*/
 trafficLightNumber = 0;
 function trafficLight(){
-  canvas("200px","300px","#fff",id,"0","0");
+  canvas("200px","300px","transparent",id,"0","0");
   let traffic = document.getElementById(id);
   let closeButton = document.createElement("button");
   let trafficImage = document.createElement("img");
@@ -533,7 +475,7 @@ function trafficLight(){
 
   trafficImage.src = "/images/traffic.png";
   trafficImage.classList.add("traffic-image");
-  traffic.classList.add("rounded-divs");
+  traffic.classList.add("rounded-divs",'traffic-container');
 
   redLight.classList.add("lights","red-light");
   yellowLight.classList.add("lights","yellow-light");
@@ -564,38 +506,13 @@ function trafficLight(){
   })
  
    /*drag*/
-   traffic.onmousedown = function(){
-    dragValue = traffic;
-    traffic.style.zIndex = "100";
-  }
-  
-  document.onmouseup = function(e){
-  dragValue = null;
-  traffic.style.zIndex = "0";
-  }
-  document.onmousemove = function(e){
-  let x = e.pageX ;
-  let y = e.pageY ;
-  
-  dragValue.style.left = x - 100 + "px";
-  dragValue.style.top = y + "px";
-  }
+   dragElements(traffic);
 
   /*close*/
   closeButton.addEventListener('click',()=>{
-    if(id === id){
-    traffic.classList.add("animate-deleting-editor");
-    setTimeout(()=>{
-      traffic.remove();
-      id--;
-      trafficLightNumber--;
-    numberTrafficOpenTag.innerHTML = trafficLightNumber;
-    trafficLightNumber > 0 ? numberCalendarOpenTag.style.visibility = "visible":numberTrafficOpenTag.style.visibility = "hidden";
-    },200)
-  
-  }
+    deleteElements(traffic,trafficLightNumber,numberTrafficOpenTag,id);
+    trafficLightNumber--;
   })
- 
   id += 1;
  trafficLightNumber += 1;
  numberTrafficOpenTag.innerHTML = trafficLightNumber;
@@ -654,47 +571,19 @@ function RandomName(){
         names.length < 2 ? result.innerHTML = "add more names" : result.innerHTML = names[random];  
          names.splice(random,1);
          numberOfName.innerHTML = names.length + "/100";
-         posibleOptions.innerHTML = "Posible options: "+ names;
-         
+         posibleOptions.innerHTML = "Posible options: "+ names;  
       }
     })
   
     /*drag*/
    randomNameContainer.style.position = "absolute";
-   randomNameContainer.onmousedown = function(){
-    dragValue = randomNameContainer;
-    randomNameContainer.style.zIndex = "100";
-    randomNameContainer.style.cursor= "pointer";
-  }
-  
-  document.onmouseup = function(e){
-  dragValue = null;
- randomNameContainer.style.zIndex = "0";
- randomNameContainer.style.cursor= "";
-  }
-  document.onmousemove = function(e){
-  let x = e.clientX;
-  let y = e.clientY;
-  
-  dragValue.style.left = x - 200  + "px";
-  dragValue.style.top = y + "px";
-  }
+   dragElements(randomNameContainer);
 
   /*delete*/
   deleteButton.addEventListener('click',()=>{
-    if(id === id){
-    randomNameContainer.classList.add("animate-deleting-editor");
-    setTimeout(()=>{
-      randomNameContainer.remove();
-      id--;
-      randomNameNumber--;
-      openRandomtag.innerHTML = randomNameNumber;
-       randomNameNumber > 0 ? openRandomtag.style.visibility = "visible":openRandomtag.style.visibility = "hidden";
-    },200)
-  
-  }
+    deleteElements(randomNameContainer,randomNameNumber,openRandomtag,id);
+    randomNameNumber--;
   })
-
   id += 1;
   randomNameNumber += 1;
   openRandomtag.innerHTML = randomNameNumber;
@@ -719,7 +608,7 @@ function stopWatch(){
   let showLapContainer =  document.createElement('div');
   let showLap = document.createElement('p');
   let pauseButton = document.createElement('button');
-  
+  let stoptwatchEleNumbertag = document.querySelector('.stopwatch-ele-number');
   
   /*add classes to elements*/
   seconds.classList.add("seconds");
@@ -758,7 +647,6 @@ function stopWatch(){
   timeContainer.appendChild(seconds);
   stopWatchContainer.appendChild(showLapContainer);
   
-
   /*stowatch code*/
   stopWatchSeconds < 1 ? lapButton.disabled = true : lapButton.disabled = false;
   function startTimer(){
@@ -796,6 +684,8 @@ function stopWatch(){
     minutes.innerHTML = 0 + ":";
     seconds.innerHTML = 0;
     clearInterval(stopWatchInterval);
+    pauseButton.style.visibility = "hidden";
+     startButton.style.visibility = "visible";
   })
 
   lapButton.addEventListener('click',()=>{
@@ -812,45 +702,21 @@ function stopWatch(){
  
   /*drag*/
   stopWatchContainer.style.position = "absolute";
-   stopWatchContainer.onmousedown = function(){
-    dragValue = stopWatchContainer;
-    stopWatchContainer.style.zIndex = "100";
-    stopWatchContainer.style.cursor= "pointer";
-  }
-  
-  document.onmouseup = function(e){
-  dragValue = null;
- stopWatchContainer.style.zIndex = "0";
- stopWatchContainer.style.cursor= "";
-  }
-  document.onmousemove = function(e){
-  let x = e.clientX;
-  let y = e.clientY;
-  
-  dragValue.style.left = x - 200  + "px";
-  dragValue.style.top = y + "px";
-  }
-
+  dragElements(stopWatchContainer);
   deleteButton.addEventListener('click',()=>{
-    if(id === id){
-    stopWatchContainer.classList.add("animate-deleting-editor");
-    setTimeout(()=>{
-      stopWatchContainer.remove();
-      id--;
-      stopWatchNumber--;
-    
-    },200)
-  
-  }
+    deleteElements(stopWatchContainer,stopWatchNumber,stoptwatchEleNumbertag,id);
+    stopWatchNumber--;
   })
-
   id += 1;
+  stopWatchNumber += 1;
+  stoptwatchEleNumbertag.innerHTML = stopWatchNumber;
+  stopWatchNumber > 0 ? stoptwatchEleNumbertag.style.visibility = "visible":stoptwatchEleNumbertag.style.visibility = "hidden";
 }
 
 /*Scores and stars*/
+let scoresNumber= 0;
 function getScores(){
   canvas("450px","180px","#fff",id,"0","0");
-  
   let scoresContainer = document.getElementById(id);
   let scoresInputContainer = document.createElement('div');
   let deleteButton = document.createElement('button');
@@ -860,6 +726,9 @@ function getScores(){
   let getScoresBtn = document.createElement('button');
   let buttonsContainer = document.createElement('div');
   let studentScores = document.createElement('div');
+  let scoresOpenTag = document.querySelector(".scores-ele-number");
+  
+
  
   /*add classes to element*/
   deleteButton.classList.add("small-button","fa-solid","fa-xmark");
@@ -870,6 +739,7 @@ function getScores(){
   getScoresBtn.classList.add('random-button','get-scores-btn');
   buttonsContainer.classList.add('buttons-container');
   studentScores.classList.add('students-scores');
+  
   /*append child elements*/
   scoresContainer.appendChild(deleteButton);
   scoresContainer.appendChild(buttonsContainer);
@@ -880,7 +750,6 @@ function getScores(){
   scoresInputContainer.appendChild(inputNumber);
   scoresContainer.appendChild(studentScores);
   
-
   /*inner html*/
   inputName.placeholder = "Enter name..."
   inputNumber.type = "number";
@@ -890,10 +759,12 @@ function getScores(){
   inputNumber.max = "10";
 
   /*create student object*/
-  
   let suffix = 0;
   let scores = [];
   let students = []
+
+  /*test*/
+  
   enterScores.addEventListener('click',()=>{
   
       students[suffix] = {
@@ -910,62 +781,89 @@ function getScores(){
 
       /*new*/
       let person = " ";
-   let scoresDiv = document.createElement('div');
+      let scoresID = 0;
    for(let x in scores){
-     let divWidh = scores[x].score + 0;
-    person += scores[x].name + ": " + scores[x].score + "<br>"  + `<div class="scores-div" style="width: ${divWidh}px"></div>`;
+     let divWidh =  scores[x].score + 0 ;
+    person += `<div id="${scoresID}" class="scores-div" > ${scores[x].name + ": " + scores[x].score + "<br>"}  </div>` ;
     studentScores.innerHTML = person;
+   
   }
-   
-   
-      
       suffix += 1;
       inputName.value = "";
       inputNumber.value = "";
+      scoresID += 1;
   })
   
   getScoresBtn.addEventListener('click',()=>{
-   
    scoresContainer.classList.toggle("animate-scores");
    studentScores.classList.toggle('hide-scores');
-   
   })
- 
- 
   /*drag*/
   scoresContainer.style.position = "absolute";
-  scoresContainer.onmousedown = function(){
-    dragValue = scoresContainer;
-    scoresContainer.style.zIndex = "100";
-    scoresContainer.style.cursor= "pointer";
-  }
+  dragElements(scoresContainer);
+  /*delete*/
+  deleteButton.addEventListener('click',()=>{
+    deleteElements(scoresContainer,scoresNumber,scoresOpenTag,id);
+     scoresNumber--;
+  })
+  id += 1;
+  scoresNumber += 1;
+  scoresOpenTag.innerHTML = scoresNumber;
+  scoresNumber > 0 ? scoresOpenTag.style.visibility = "visible":scoresOpenTag.style.visibility = "hidden";
+}
+
+let mediaNumber = 0;
+function Media(){
+  canvas("450px","300px","#fff",id,"0","0");
+  let mediaContainer = document.getElementById(id);
+  let deleteButton = document.createElement('button');
+  let inputVideoUrl = document.createElement('input');
+  let ifrm = document.createElement('iframe');
+  let playButton =  document.createElement('button');
+  let mediaOpenTag = document.querySelector(".video-ele-number");
+
+  ifrm.setAttribute('id', 'ifrm');
+  mediaContainer.style.position ="absolute";
+
+  /*add classes*/
+  mediaContainer.classList.add("media-container");
+  deleteButton.classList.add("small-button","fa-solid","fa-xmark");
+  playButton.classList.add("small-button","fa-solid","fa-play","media-playbtn");
+  ifrm.style.width = "445px";
+  ifrm.style.height = "240px"; 
+  ifrm.setAttribute('allowFullScreen', '')
+  ifrm.classList.add('iframe-youtube');
+  inputVideoUrl.placeholder = "Enter Url";
+
+ 
+  /*drag*/
+  dragElements(mediaContainer);
   
-  document.onmouseup = function(e){
-  dragValue = null;
- scoresContainer.style.zIndex = "0";
- scoresContainer.style.cursor= "";
-  }
-  document.onmousemove = function(e){
-  let x = e.clientX;
-  let y = e.clientY;
-  
-  dragValue.style.left = x - 200  + "px";
-  dragValue.style.top = y + "px";
-  }
+
+  playButton.addEventListener('click',()=>{
+    let mediaInputValue = inputVideoUrl.value.replace('watch?v=','embed/');
+    ifrm.src = mediaInputValue;
+    mediaContainer.appendChild(ifrm);
+    
+    console.log(mediaInputValue);
+  })
+
+  /*append*/
+  mediaContainer.appendChild(deleteButton);
+  mediaContainer.appendChild(inputVideoUrl);
+  mediaContainer.appendChild(playButton);
+
+  /*Check if input is empty*/
+ 
 
   /*delete*/
   deleteButton.addEventListener('click',()=>{
-    if(id === id){
-    scoresContainer.classList.add("animate-deleting-editor");
-    setTimeout(()=>{
-      scoresContainer.remove();
-      id--;
-     
-    
-    },200)
-  
-  }
+    deleteElements(mediaContainer,mediaNumber,mediaOpenTag,id);
+    mediaNumber--;
   })
 
   id += 1;
+  mediaNumber += 1;
+  mediaOpenTag.innerHTML = mediaNumber;
+  mediaNumber > 0 ? mediaOpenTag.style.visibility = "visible":mediaOpenTag.style.visibility = "hidden";
 }
